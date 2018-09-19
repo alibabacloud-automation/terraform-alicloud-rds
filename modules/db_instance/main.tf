@@ -18,33 +18,7 @@ resource "alicloud_db_connection" "this_db_connection" {
   port                         = "${var.port}"
 }
 
-resource "alicloud_db_database" "this_db_database" {
-
-  instance_id                  = "${alicloud_db_instance.this_mysql.id}"
-  name                         = "${var.db_name}"
-  character_set                = "${var.character_set}"
-
-}
-
-resource "alicloud_db_account" "this_db_account" {
-
-  instance_id                  = "${alicloud_db_instance.this_mysql.id}"
-  name                         = "${var.name}"
-  password                     = "${var.password}"
-  type                         = "${var.type }"
-
-}
-
-resource "alicloud_db_account_privilege" "this_db_database_privilege" {
-
-  instance_id                  = "${alicloud_db_instance.this_mysql.id}"
-  account_name                 = "${alicloud_db_account.this_db_account.name}"
-  privilege                    = "${var.privilege}"
-  db_names                     = ["${alicloud_db_database.this_db_database.*.name}"]
-
-}
-
-resource "alicloud_db_backup_policy" "this_db_account_backup_policy" {
+resource "alicloud_db_backup_policy" "this_db_backup_policy" {
   
   instance_id                  = "${alicloud_db_instance.this_mysql.id}"
   backup_period                = "${var.backup_period}"

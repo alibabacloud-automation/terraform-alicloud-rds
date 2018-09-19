@@ -54,59 +54,21 @@ variable "security_ips" {
 }
 
 ##############################################################
-#variables for alicloud_db_account
+#variables for alicloud_db_connection
 ##############################################################
-
 
 variable "instance_id" {
   description = "The Id of instance in which account belongs."
   default = ""
 }
 
-variable "name" {
-  description = "Operation account requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 16 characters."
+variable "connection_prefix" {
+  description = "(Optional) Prefix of an Internet connection string. It must be checked for uniqueness. It may consist of lowercase letters, numbers, and underlines, and must start with a letter and have no more than 30 characters. Default to + 'tf'."
 }
 
-variable "password" {
-  description = "Operation password. It may consist of letters, digits, or underlines, with a length of 6 to 32 characters."
-}
-
-variable "type" {
-  description = "Privilege type of account.Normal: Common privilege. Super: High privilege.Default to Normal. It is is valid for MySQL 5.5/5.6 only."
-  default     = "Normal"
-}
-
-
-##############################################################
-#variables for alicloud_db_database
-##############################################################
-
-variable "db_name" {
-  description = "(Required) Name of the database requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 64 characters."
-}
-
-variable "character_set" {
-  description = "(Required) Character set."
-}
-
-
-##############################################################
-#variables for alicloud_db_account_privilege
-##############################################################
-
-variable "account_name" {
-  description = "A specified account name."
-  default = ""
-}
-
-variable "privilege" {
-  description = "The privilege of one account access database."
-  default     = "ReadOnly"
-}
-
-variable "db_names" {
-  description = "(Optional) List of specified database name."
-  default     = []  
+variable "port" {
+  description = " (Optional) Internet connection port. Valid value: [3001-3999]. Default to 3306."
+  default     = 3306
 }
 
 ###############################################################
@@ -135,17 +97,6 @@ variable "log_retention_period" {
   default = 7
 }
 
-##############################################################
-#variables for alicloud_db_connection
-##############################################################
 
-variable "connection_prefix" {
-  description = "(Optional) Prefix of an Internet connection string. It must be checked for uniqueness. It may consist of lowercase letters, numbers, and underlines, and must start with a letter and have no more than 30 characters. Default to + 'tf'."
-}
-
-variable "port" {
-  description = " (Optional) Internet connection port. Valid value: [3001-3999]. Default to 3306."
-  default     = 3306
-}
 
 
