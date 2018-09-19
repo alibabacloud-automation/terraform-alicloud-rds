@@ -1,8 +1,3 @@
-provider "alicloud" {
-  access_key = "LTAI72xLHLX7mPBn"
-  secret_key = "Khpg6twAlWcvwRIrKlihinyCFTeidh"
-  region     = "cn-hangzhou"
-}
 
 module "db_instance" {
   source = "./modules/db_instance"
