@@ -15,5 +15,3 @@
 |------|-------------|
 | this_db_instance_databese_id    |      database ID created in this instance        |
 | this_db_instance_databese_name    |     database name created in this instance         |
-| this_db_instance_databese_account     |    database account associated in this instance          |
-| this_db_instance_databese_accountprivilege     |    database account privilege associated in this instance         |
