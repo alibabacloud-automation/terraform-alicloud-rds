@@ -1,25 +1,18 @@
 # Alicloud RDS Instance Terraform Module 
 
-A terraform module to provide RDS instances in Alicloud VPC. Its input variables contains Instance ID, Instance Name, Connecting String, Database name, Datebase user account and so on. 
-
-It assumes you have one VPC and VSwitch and you want to put the new instances to the VPC. If not, you can launch a new one by module terraform-alicloud-vpc.
+A terraform module to provide RDS instances in Alicloud VPC. 
 
 
 ## You can use this in your terraform template with the following steps.
 
 
-#### 1. Adding the module resource to your template:
+#### 1. Adding a module resource to your template, e.g. main.tf
     
-    terraform get ./modules/db_instance
-
-#### 2. Using module in you tf file like below (as shown in demo.tf):
-
 #### Usage:
 
 ```hcl
 module "rds" {
-  #source = "terraform-alicloud-modules/rds/alicloud"
-  source = "./database"
+  source = "terraform-alicloud-modules/rds/alicloud"
 
 ###############################################################
 #variables for db instance
@@ -66,58 +59,13 @@ module "rds" {
 }
 ```
 
-#### 3. you can use output to display the results:
-#### Usage:
+#### 2. Setting access_key and secret_key values through environment variables:
 
-```hcl
-output "db_instance_id" {
-  value       = "${module.rds.db_instance_id}"
-}
+    - ALICLOUD_ACCESS_KEY
+    - ALICLOUD_SECRET_KEY
+    - ALICLOUD_REGION
 
-output "this_db_instance_engine" {
-  value       = "${module.rds.this_db_instance_engine}"
-}
 
-output "this_db_instance_engine_version" {
-  value       = "${module.rds.this_db_instance_engine_version}"
-}
-
-output "this_db_instance_instance_name" {
-  value       = "${module.rds.this_db_instance_instance_name}"
-}
-
-output "this_db_instance_zone_id" {
-  value       = "${module.rds.this_db_instance_zone_id}"
-}
-
-output "this_db_instance_connection_string" {
-  value       = "${module.rds.this_db_instance_connection_string}"
-}
-
-output "this_db_instance_port" {
-  value       = "${module.rds.this_db_instance_port}"
-}
-
-output "this_db_instance_security_ips" {
-  value       = "${module.rds.this_db_instance_security_ips}"
-}
-
-output "this_db_databese_id" {
-  value       = "${module.rds.this_db_databese_id}"
-}
-
-output "this_db_databese_name" {
-  value       = "${module.rds.this_db_databese_name}"
-}
-
-output "this_db_databese_account" {
-  value       = "${module.rds.this_db_databese_account}"
-}
-
-output "this_db_databese_accountprivilege" {
-  value       = "${module.rds.this_db_databese_accountprivilege}"
-}
-```
 
 
 ## Inputs
@@ -125,9 +73,9 @@ output "this_db_databese_accountprivilege" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 |engine               | Database type. Value options: MySQL, SQLServer, PostgreSQL, and PPAS.    |  string     |     MySQL      | yes |  
-|engine_version       | Database version. Value options: >5.5/5.6/5.7 for MySQL ; >2008r2/2012 for SQLServer ;>9.4/10.0 for PostgreSQL ;>9.3 for PPAS   |   string  |    5.7    |    yes       | 
+|engine_version       | Database version. Value options:<br>5.5/5.6/5.7 for MySQL ;<br>2008r2/2012 for SQLServer ;>9.4/10.0 for PostgreSQL ;>9.3 for PPAS   |   string  |    5.7    |    yes       | 
 |instance_type        | DB Instance type. For details, see [Instance type table](https://www.alibabacloud.com/help/doc-detail/26312.htm).   |     string  |  mysql.n1.micro.1   |    yes       |  
-|instance_storage     | User-defined DB instance storage space. Value range: >[5, 2000] for MySQL/PostgreSQL/PPAS HA dual node edition; >[20,1000] for MySQL 5.7 basic single node edition; >[10, 2000] for SQL Server 2008R2; >[20,2000] for SQL Server 2012 basic single node edition Increase progressively at a rate of 5 GB. For details, see [Instance type table](https://www.alibabacloud.com/help/doc-detail/26312.htm).   |    string   |     20      |     yes      | 
+|instance_storage     | User-defined DB instance storage space. Value range:<br>[5, 2000] for MySQL/PostgreSQL/PPAS HA dual node edition;<br>[20,1000] for MySQL 5.7 basic single node edition;<br>[10, 2000] for SQL Server 2008R2;<br>[20,2000] for SQL Server 2012 basic single node edition Increase progressively at a rate of 5 GB. For details, see [Instance type table](https://www.alibabacloud.com/help/doc-detail/26312.htm).   |    string   |     20      |     yes      | 
 |instance_name        | The name of DB instance. It a string of 2 to 256 characters.    |  string     |     myTestDBInstance      |    no       | 
 |instance_charge_type | Valid values are Prepaid, Postpaid, Default to Postpaid.  |  string     |     Postpaid      |     no      |  = "Postpaid"
 |zone_id              | The Zone to launch the DB instance. From version 1.8.1, it supports multiple zone. If it is a multi-zone and vswitch_id is specified, the vswitch must in the one of them. The multiple zone ID can be retrieved by setting multi to "true" in the data source alicloud_zones.  |  string     |     cn-hangzhou-b      |   no        |  
@@ -162,4 +110,3 @@ Reference
 * [Terraform-Provider-Alicloud Github](https://github.com/terraform-providers/terraform-provider-alicloud)
 * [Terraform-Provider-Alicloud Release](https://releases.hashicorp.com/terraform-provider-alicloud/)
 * [Terraform-Provider-Alicloud Docs](https://www.terraform.io/docs/providers/alicloud/index.html)
-
