@@ -73,7 +73,7 @@ module "rds" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 |engine               | Database type. Value options: MySQL, SQLServer, PostgreSQL, and PPAS.    |  string     |     MySQL      | yes |  
-|engine_version       | Database version. Value options:<br>5.5/5.6/5.7 for MySQL ;<br>2008r2/2012 for SQLServer ;>9.4/10.0 for PostgreSQL ;>9.3 for PPAS   |   string  |    5.7    |    yes       | 
+|engine_version       | Database version. Value options:<br>5.5/5.6/5.7 for MySQL ;<br>2008r2/2012 for SQLServer; <br>9.4/10.0 for PostgreSQL; <br>9.3 for PPAS   |   string  |    5.7    |    yes       | 
 |instance_type        | DB Instance type. For details, see [Instance type table](https://www.alibabacloud.com/help/doc-detail/26312.htm).   |     string  |  mysql.n1.micro.1   |    yes       |  
 |instance_storage     | User-defined DB instance storage space. Value range:<br>[5, 2000] for MySQL/PostgreSQL/PPAS HA dual node edition;<br>[20,1000] for MySQL 5.7 basic single node edition;<br>[10, 2000] for SQL Server 2008R2;<br>[20,2000] for SQL Server 2012 basic single node edition Increase progressively at a rate of 5 GB. For details, see [Instance type table](https://www.alibabacloud.com/help/doc-detail/26312.htm).   |    string   |     20      |     yes      | 
 |instance_name        | The name of DB instance. It a string of 2 to 256 characters.    |  string     |     myTestDBInstance      |    no       | 
