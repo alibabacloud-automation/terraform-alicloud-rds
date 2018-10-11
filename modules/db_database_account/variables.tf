@@ -23,8 +23,6 @@ variable "type" {
 }
 
 
-
-
 ##############################################################
 #variables for alicloud_db_account_privilege
 ##############################################################
@@ -40,6 +38,7 @@ variable "privilege" {
 }
 
 variable "db_names" {
-  description = "(Optional) List of specified database name."
+  description = "List of specified database name."
+  type = "list"
   default     = []  
 }

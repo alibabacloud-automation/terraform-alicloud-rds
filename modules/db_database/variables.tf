@@ -8,10 +8,10 @@ variable "instance_id" {
 }
 
 variable "db_name" {
-  description = "(Required) Name of the database requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 64 characters."
+  description = "Name of the database requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 64 characters."
 }
 
 variable "character_set" {
-  description = "(Required) Character set."
+  description = "Character set."
 }
 
