@@ -17,9 +17,10 @@ It assumes you have one VPC and VSwitch and you want to put the new instances to
 #### Usage:
 
 ```hcl
-module "db_instance" {
-  source = "./modules/db_instance"
-  
+module "rds" {
+  #source = "terraform-alicloud-modules/rds/alicloud"
+  source = "./database"
+
 ###############################################################
 #variables for db instance
 ##############################################################
@@ -30,7 +31,7 @@ module "db_instance" {
   instance_storage             = "20"
   instance_name                = "myTestDBInstance"
   instance_charge_type         = "Postpaid"
-  zone_id                      = "cn-hangzhou-b"
+  zone_id                      = "cn-hangzhou-f"
   security_ips                 = ["11.193.54.0/24","101.37.74.0/24","10.137.42.0/24","121.43.18.0/24"]
 
 ###############################################################
@@ -75,51 +76,51 @@ module "db_instance" {
 
 ```hcl
 output "db_instance_id" {
-  value       = "${module.db_instance.this_db_instance_id}"
+  value       = "${module.rds.db_instance_id}"
 }
 
 output "this_db_instance_engine" {
-  value       = "${module.db_instance.this_db_instance_engine}"
+  value       = "${module.rds.this_db_instance_engine}"
 }
 
 output "this_db_instance_engine_version" {
-  value       = "${module.db_instance.this_db_instance_engine_version}"
+  value       = "${module.rds.this_db_instance_engine_version}"
 }
 
 output "this_db_instance_instance_name" {
-  value       = "${module.db_instance.this_db_instance_instance_name}"
+  value       = "${module.rds.this_db_instance_instance_name}"
 }
 
 output "this_db_instance_zone_id" {
-  value       = "${module.db_instance.this_db_instance_zone_id}"
+  value       = "${module.rds.this_db_instance_zone_id}"
 }
 
 output "this_db_instance_connection_string" {
-  value       = "${module.db_instance.this_db_instance_connection_string}"
+  value       = "${module.rds.this_db_instance_connection_string}"
 }
 
 output "this_db_instance_port" {
-  value       = "${module.db_instance.this_db_instance_port}"
+  value       = "${module.rds.this_db_instance_port}"
 }
 
 output "this_db_instance_security_ips" {
-  value       = "${module.db_instance.this_db_instance_security_ips}"
+  value       = "${module.rds.this_db_instance_security_ips}"
 }
 
-output "this_db_instance_databese_id" {
-  value       = "${module.db_instance.this_db_instance_databese_id}"
+output "this_db_databese_id" {
+  value       = "${module.rds.this_db_databese_id}"
 }
 
-output "this_db_instance_databese_name" {
-  value       = "${module.db_instance.this_db_instance_databese_name}"
+output "this_db_databese_name" {
+  value       = "${module.rds.this_db_databese_name}"
 }
 
-output "this_db_instance_databese_account" {
-  value       = "${module.db_instance.this_db_instance_databese_account}"
+output "this_db_databese_account" {
+  value       = "${module.rds.this_db_databese_account}"
 }
 
-output "this_db_instance_databese_accountprivilege" {
-  value       = "${module.db_instance.this_db_instance_databese_accountprivilege}"
+output "this_db_databese_accountprivilege" {
+  value       = "${module.rds.this_db_databese_accountprivilege}"
 }
 ```
 
