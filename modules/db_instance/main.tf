@@ -1,4 +1,4 @@
-resource "alicloud_db_instance" "this_mysql" {
+resource "alicloud_db_instance" "this_instance" {
   
   engine                       = "${var.engine}"
   engine_version               = "${var.engine_version}"
