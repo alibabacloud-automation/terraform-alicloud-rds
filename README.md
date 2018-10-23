@@ -1,4 +1,5 @@
-# Alicloud RDS Instance Terraform Module 
+Alicloud RDS Instance Terraform Module 
+terraform-alicloud-rds
 
 This Terraform module will first creates a RDS instance, then create and associate a database and DB account to this instance.
 Also you can config the backup policy of instance created on Alibaba Cloud.
