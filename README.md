@@ -2,22 +2,27 @@
 
 A terraform module to provide RDS instances in Alicloud VPC. 
 
+These types of resources are supported:
 
-## You can use this in your terraform template with the following steps.
+* [alicloud_db_instance](https://www.terraform.io/docs/providers/alicloud/r/db_instance.html)
+* [alicloud_db_account](https://www.terraform.io/docs/providers/alicloud/r/db_account.html)
+* [alicloud_db_database](https://www.terraform.io/docs/providers/alicloud/r/db_database.html)
+* [alicloud_db_backup_policy](https://www.terraform.io/docs/providers/alicloud/r/db_backup_policy.html)
 
+----------------------
 
-#### 1. Adding a module resource to your template, e.g. main.tf
+Usage
+-----
+You can use this in your terraform template with the following steps.
+
+1. Adding a module resource to your template, e.g. main.tf
     
-#### Usage:
-
 ```hcl
 module "rds" {
   source = "terraform-alicloud-modules/rds/alicloud"
 
-###############################################################
-#variables for db instance
-##############################################################
-
+  #variables for db instance
+  
   engine                       = "MySQL"
   engine_version               = "5.7"
   instance_type                = "mysql.n1.micro.1"
@@ -27,29 +32,23 @@ module "rds" {
   zone_id                      = "cn-hangzhou-f"
   security_ips                 = ["11.193.54.0/24","101.37.74.0/24","10.137.42.0/24","121.43.18.0/24"]
 
-
-###############################################################
-#variables for db account
-##############################################################
+  #variables for db account
+  
   name                         = "dbuser"
   password                     = "testUser123"
   type                         = "Normal"
 
-##############################################################
-#variables for account_privilege
-##############################################################
+  #variables for account_privilege
 
   privilege                    = "ReadWrite"
 
-###############################################################
-#variables for database
-##############################################################
-  db_name = "tf_database"
-  character_set = "utf8"
+  #variables for database
 
-###############################################################
-#variables for backup
-##############################################################
+  db_name                      = "tf_database"
+  character_set                = "utf8"
+
+  #variables for backup
+
   backup_period                = ["Monday", "Wednesday"]
   backup_time                  = "02:00Z-03:00Z"
   retention_period             = 7
@@ -59,13 +58,11 @@ module "rds" {
 }
 ```
 
-#### 2. Setting access_key and secret_key values through environment variables:
+2. Setting `access_key` and `secret_key` values through environment variables:
 
     - ALICLOUD_ACCESS_KEY
     - ALICLOUD_SECRET_KEY
     - ALICLOUD_REGION
-
-
 
 
 ## Inputs
@@ -101,7 +98,7 @@ module "rds" {
 | this_db_instance_databese_accountprivilege     |    database account privilege associated in this instance         |
 
 
-## Authors
+Authors
 ---------
 Created and maintained by Yongjin Yan(@YongjinYan, yanyongjin@gmail.com)
 
