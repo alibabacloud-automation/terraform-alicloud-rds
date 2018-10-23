@@ -1,15 +1,17 @@
 # Alicloud RDS Instance Terraform Module 
 
-A terraform module to provide RDS instances in Alicloud VPC. 
+This Terraform module will first creates a RDS instance, then create and associate a database and DB account to this instance.
+Also you can config the backup policy of instance created on Alibaba Cloud.
 
 These types of resources are supported:
 
-* [alicloud_db_instance](https://www.terraform.io/docs/providers/alicloud/r/db_instance.html)
-* [alicloud_db_account](https://www.terraform.io/docs/providers/alicloud/r/db_account.html)
-* [alicloud_db_database](https://www.terraform.io/docs/providers/alicloud/r/db_database.html)
-* [alicloud_db_backup_policy](https://www.terraform.io/docs/providers/alicloud/r/db_backup_policy.html)
+* [Alicloud_db_instance](https://www.terraform.io/docs/providers/alicloud/r/db_instance.html)
+* [Alicloud_db_account](https://www.terraform.io/docs/providers/alicloud/r/db_account.html)
+* [Alicloud_db_database](https://www.terraform.io/docs/providers/alicloud/r/db_database.html)
+* [Alicloud_db_backup_policy](https://www.terraform.io/docs/providers/alicloud/r/db_backup_policy.html)
 
 ----------------------
+
 
 Usage
 -----
