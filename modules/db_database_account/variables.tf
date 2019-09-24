@@ -1,12 +1,10 @@
-
 ##############################################################
 #variables for alicloud_db_account
 ##############################################################
 
-
 variable "instance_id" {
   description = "The Id of instance in which account belongs."
-  default = ""
+  default     = ""
 }
 
 variable "name" {
@@ -22,14 +20,13 @@ variable "type" {
   default     = "Normal"
 }
 
-
 ##############################################################
 #variables for alicloud_db_account_privilege
 ##############################################################
 
 variable "account_name" {
   description = "A specified account name."
-  default = ""
+  default     = ""
 }
 
 variable "privilege" {
@@ -39,6 +36,7 @@ variable "privilege" {
 
 variable "db_names" {
   description = "List of specified database name."
-  type = "list"
-  default     = []  
+  type        = list(string)
+  default     = []
 }
+

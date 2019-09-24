@@ -1,3 +1,8 @@
+variable "region" {
+  description = "The region used to launch this module resources."
+  default     = ""
+}
+
 ##############################################################
 #variables for db alicloud_db_instance
 ##############################################################
@@ -40,18 +45,18 @@ variable "zone_id" {
 
 variable "vpc_security_group_ids" {
   description = "List of VPC security groups to associate"
-  type = "list"
+  type        = list(string)
   default     = []
 }
 
 variable "vswitch_id" {
   description = "The virtual switch ID to launch DB instances in one VPC."
-  default = ""
+  default     = ""
 }
 
 variable "security_ips" {
   description = " List of IP addresses allowed to access all databases of an instance. The list contains up to 1,000 IP addresses, separated by commas. Supported formats include 0.0.0.0/0, 10.23.12.24 (IP), and 10.23.12.24/24 (Classless Inter-Domain Routing (CIDR) mode. /24 represents the length of the prefix in an IP address. The range of the prefix length is [1,32])."
-  type = "list"
+  type        = list(string)
   default     = []
 }
 
@@ -74,8 +79,8 @@ variable "port" {
 
 variable "backup_period" {
   description = "DB Instance backup period."
-  type = "list"
-  default = []
+  type        = list(string)
+  default     = []
 }
 
 variable "backup_time" {
@@ -92,7 +97,7 @@ variable "log_backup" {
 
 variable "log_retention_period" {
   description = "Instance log backup retention days. Valid values: [7-730]. Default to 7. It can be larger than 'retention_period'."
-  default = 7
+  default     = 7
 }
 
 ##############################################################
@@ -101,7 +106,7 @@ variable "log_retention_period" {
 
 variable "instance_id" {
   description = "The Id of instance in which database belongs."
-  default = ""
+  default     = ""
 }
 
 variable "db_name" {
@@ -116,7 +121,6 @@ variable "character_set" {
 #variables for alicloud_db_account
 ##############################################################
 
-
 variable "name" {
   description = "Operation account requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 16 characters."
 }
@@ -130,14 +134,13 @@ variable "type" {
   default     = "Normal"
 }
 
-
 ##############################################################
 #variables for alicloud_db_account_privilege
 ##############################################################
 
 variable "account_name" {
   description = "A specified account name."
-  default = ""
+  default     = ""
 }
 
 variable "privilege" {
@@ -147,7 +150,7 @@ variable "privilege" {
 
 variable "db_names" {
   description = "List of specified database name."
-  type = "list"
+  type        = list(string)
   default     = []
 }
 

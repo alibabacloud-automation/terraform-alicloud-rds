@@ -4,7 +4,7 @@
 
 variable "instance_id" {
   description = "The Id of instance in which database belongs."
-  default = ""
+  default     = ""
 }
 
 variable "db_name" {
