@@ -121,8 +121,9 @@ variable "character_set" {
 #variables for alicloud_db_account
 ##############################################################
 
-variable "name" {
-  description = "Operation account requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 16 characters."
+variable "account_name" {
+  description = "A specified account name."
+  default     = ""
 }
 
 variable "password" {
@@ -137,11 +138,6 @@ variable "type" {
 ##############################################################
 #variables for alicloud_db_account_privilege
 ##############################################################
-
-variable "account_name" {
-  description = "A specified account name."
-  default     = ""
-}
 
 variable "privilege" {
   description = "The privilege of one account access database."

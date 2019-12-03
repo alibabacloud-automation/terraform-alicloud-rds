@@ -38,7 +38,7 @@ module "rds" {
 
   #variables for db account
   
-  name                         = "dbuser"
+  account_name                 = "dbuser"
   password                     = "testUser123"
   type                         = "Normal"
 

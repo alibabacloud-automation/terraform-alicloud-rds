@@ -48,14 +48,15 @@ module "db_database_account" {
   ###############################################################
   #variables for db account
   ##############################################################
-  name     = var.name
-  password = var.password
-  type     = var.type
+  name        = var.account_name
+  password    = var.password
+  type        = var.type
+  instance_id = module.db_instance.this_db_instance_id
 
   ##############################################################
   #variables for account_privilege
   ##############################################################
   privilege = var.privilege
-  db_names  = module.db_database.this_db_instance_databese_name
+  db_names  = module.db_database.this_db_instance_database_name
 }
 

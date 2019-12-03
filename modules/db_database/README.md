@@ -13,5 +13,5 @@
 
 | Name | Description |
 |------|-------------|
-| this_db_instance_databese_id    |      database ID created in this instance        |
-| this_db_instance_databese_name    |     database name created in this instance         |
+| this_db_instance_database_id    |      database ID created in this instance        |
+| this_db_instance_database_name    |     database name created in this instance         |
