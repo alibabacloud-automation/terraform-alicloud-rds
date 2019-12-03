@@ -51,6 +51,6 @@ module "db_database_account" {
   #variables for account_privilege
   ##############################################################
   privilege = "ReadWrite"
-  db_names  = module.db_database.this_db_instance_databese_name
+  db_names  = module.db_database.this_db_instance_database_name
 }
 

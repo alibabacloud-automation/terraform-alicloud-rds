@@ -14,5 +14,5 @@
 
 | Name | Description |
 |------|-------------|
-| this_db_instance_databese_account     |    database account associated in this instance          |
-| this_db_instance_databese_accountprivilege     |    database account privilege associated in this instance         |
+| this_db_instance_database_account     |    database account associated in this instance          |
+| this_db_instance_database_accountprivilege     |    database account privilege associated in this instance         |

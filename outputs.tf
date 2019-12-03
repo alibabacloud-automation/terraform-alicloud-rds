@@ -30,19 +30,19 @@ output "this_db_instance_security_ips" {
   value = module.db_instance.this_db_instance_security_ips
 }
 
-output "this_db_databese_id" {
-  value = module.db_database.this_db_instance_databese_id
+output "this_db_database_id" {
+  value = module.db_database.this_db_instance_database_id
 }
 
-output "this_db_databese_name" {
-  value = module.db_database.this_db_instance_databese_name
+output "this_db_database_name" {
+  value = module.db_database.this_db_instance_database_name
 }
 
-output "this_db_databese_account" {
-  value = module.db_database_account.this_db_instance_databese_account
+output "this_db_database_account" {
+  value = module.db_database_account.this_db_instance_database_account
 }
 
-output "this_db_databese_accountprivilege" {
-  value = module.db_database_account.this_db_instance_databese_accountprivilege
+output "this_db_database_accountprivilege" {
+  value = module.db_database_account.this_db_instance_database_accountprivilege
 }
 

@@ -29,10 +29,10 @@ Note that this example may create resources which cost money. Run `terraform des
 | this_db_instance_connection_string     |     intance public net connection string created        |
 | this_db_instance_port     |     instance connection port created         |
 | this_db_instance_security_ips     |    instance security ips configured         |
-| this_db_instance_databese_id    |      database ID created in this instance        |
-| this_db_instance_databese_name    |     database name created in this instance         |
-| this_db_instance_databese_account     |    database account associated in this instance          |
-| this_db_instance_databese_accountprivilege     |    database account privilege associated in this instance         |
+| this_db_instance_database_id    |      database ID created in this instance        |
+| this_db_instance_database_name    |     database name created in this instance         |
+| this_db_instance_database_account     |    database account associated in this instance          |
+| this_db_instance_database_accountprivilege     |    database account privilege associated in this instance         |
 
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
