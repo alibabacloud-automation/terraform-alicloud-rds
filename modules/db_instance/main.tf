@@ -8,6 +8,7 @@ resource "alicloud_db_instance" "this_instance" {
   zone_id              = var.zone_id
   period               = var.period
   security_ips         = var.security_ips
+  vswitch_id           = join(",", var.vswitch_id)
 }
 
 resource "alicloud_db_backup_policy" "this_db_backup_policy" {

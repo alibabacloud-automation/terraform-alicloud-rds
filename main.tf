@@ -19,6 +19,7 @@ module "db_instance" {
   instance_charge_type = var.instance_charge_type
   zone_id              = var.zone_id
   security_ips         = var.security_ips
+  vswitch_id           = var.vswitch_id
 
   ###############################################################
   #variables for backup

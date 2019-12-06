@@ -45,8 +45,8 @@ variable "vpc_security_group_ids" {
 }
 
 variable "vswitch_id" {
-  description = "The virtual switch ID to launch DB instances in one VPC."
-  default     = ""
+  description = "The list of switch ID to launch DB instances. If you need to create a Multi-AZ instance, this field must specify multiple ids, otherwise only one should be specified"
+  default     = []
 }
 
 variable "security_ips" {
