@@ -1,9 +1,10 @@
-## 1.2.0 (December 3, 2019)
 
-IMPROVEMENTS:
+## 1.2.0 (December 13, 2019)
 
-- imporve(rds): update the module to the format of the new version.  ([GH-6](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/pull/6))
+- **Added:** `examples` [GH-24](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/pull/9)
+- improve(rds):Remove sub modules and put all resources in a main.tf
+- improve(rds):Each resource should support a control parameter, such as new_instance, new_database...
+- improve(rds):Different engines need to provide a separate sub module and a corresponding example to help users to use (Mysql module has been completed)
+- improve(rds):Support for read-only instances
 
-BUG FIXES:
-
-- fix(rds): fix sub module no instance id specified and account name specified error.  ([GH-7](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/pull/7))
+>>>>>>> inporve_rds
