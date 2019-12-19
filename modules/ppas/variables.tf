@@ -1,28 +1,10 @@
 variable "region" {
   description = "The region used to launch this module resources."
-  default     = ""
+  default     = "cn-hangzhou"
 }
-
-variable "profile" {
-  description = "The profile name as set in the shared credentials file. If not set, it will be sourced from the ALICLOUD_PROFILE environment variable."
-  default     = ""
-}
-variable "shared_credentials_file" {
-  description = "This is the path to the shared credentials file. If this is not set and a profile is specified, $HOME/.aliyun/config.json will be used."
-  default     = ""
-}
-
-variable "skip_region_validation" {
-  description = "Skip static validation of region ID. Used by users of alternative AlibabaCloud-like APIs or users w/ access to regions that are not public (yet)."
-  default     = false
-}
-
 variable "creation" {
   default = "Rds"
 }
-##############################################################
-#variables for alicloud_db_database
-##############################################################
 
 variable "instance_id" {
   description = "The Id of instance in which database belongs."
@@ -36,11 +18,8 @@ variable "db_name" {
 
 variable "character_set" {
   description = "Character set."
+  default     = "utf8"
 }
-
-##############################################################
-#variables for alicloud_db_account
-##############################################################
 
 variable "name" {
   description = "Operation account requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 16 characters."
@@ -55,6 +34,9 @@ variable "type" {
   default     = "Normal"
 }
 
+##############################################################
+#variables for alicloud_db_account_privilege
+##############################################################
 
 variable "account_name" {
   description = "A specified account name."
@@ -72,16 +54,15 @@ variable "db_names" {
   default     = []
 }
 
-##############################################################
-#variables for db alicloud_db_instance
-##############################################################
 
 variable "engine" {
   description = "The database engine to use"
+  default     = "PPAS"
 }
 
 variable "engine_version" {
   description = "The engine version to use"
+  default     = "9.3"
 }
 
 variable "instance_storage" {
@@ -91,7 +72,7 @@ variable "instance_storage" {
 
 variable "instance_type" {
   description = "DB Instance type, for example: mysql.n1.micro.1. fall list is : https://www.alibabacloud.com/help/zh/doc-detail/26312.htm"
-  //default     = false
+  default     = "ppas.x4.large.2"
 }
 
 variable "instance_name" {
@@ -130,11 +111,6 @@ variable "security_ips" {
   default     = []
 }
 
-##############################################################
-#variables for alicloud_db_connection
-##############################################################
-
-
 
 variable "connection_prefix" {
   description = "Prefix of an Internet connection string. It must be checked for uniqueness. It may consist of lowercase letters, numbers, and underlines, and must start with a letter and have no more than 30 characters. Default to + 'tf'."
@@ -146,9 +122,6 @@ variable "port" {
   default     = 3306
 }
 
-###############################################################
-#variables for alicloud_db_backup_policy
-##############################################################
 
 variable "backup_period" {
   description = "DB Instance backup period."
@@ -177,10 +150,29 @@ variable "log_retention_period" {
 }
 #append
 variable "new_database" {
-  description = "Create DB"
-  // default     = true
+  description = "Create DB.defailt to false"
+  default     = false
 }
-
+variable "new_instance" {
+  description = "Create instance.defailt to true"
+  default     = true
+}
+variable "new_account" {
+  description = "Create account.defailt to false"
+  default     = false
+}
+variable "new_privilege" {
+  description = "Adding DB ReadOnly privilege.defailt to false"
+  default     = false
+}
+variable "new_backup_policy" {
+  description = "Adding DB backup policy.defailt to false"
+  default     = false
+}
+variable "new_db_readonly_instance" {
+  description = "Adding DB  DB readonly instance.defailt to false"
+  default     = false
+}
 variable "database_list" {
   description = "add databases"
   type        = list(map(string))
@@ -194,59 +186,20 @@ variable "db_character_set" {
   description = "Character set."
   default     = "utf8"
 }
-
-//    {
-//      name           = ""
-//      character_set  = ""
-//      description    = ""
-//    },
-//    {
-//      name           = ""
-//      character_set  = ""
-//      description    = ""
-//    }
-variable "new_instance" {
-  description = "Create instance"
-  //default     = true
+variable "profile" {
+  description = "The profile name as set in the shared credentials file. If not set, it will be sourced from the ALICLOUD_PROFILE environment variable."
+  default     = ""
 }
-variable "new_account" {
-  description = "Create account"
-  //default     = true
-}
-variable "new_privilege" {
-  description = "Adding DB ReadOnly privilege"
-  //default     = true
-}
-variable "new_backup_policy" {
-  description = "Adding DB backup policy"
-  // default     = true
+variable "shared_credentials_file" {
+  description = "This is the path to the shared credentials file. If this is not set and a profile is specified, $HOME/.aliyun/config.json will be used."
+  default     = ""
 }
 
-
-variable "readonly_engine" {
-  description = "The database engine to use"
+variable "skip_region_validation" {
+  description = "Skip static validation of region ID. Used by users of alternative AlibabaCloud-like APIs or users w/ access to regions that are not public (yet)."
+  default     = false
 }
 
-variable "readonly_engine_version" {
-  description = "The engine version to use"
-}
-
-variable "readonly_instance_storage" {
-  description = "The allocated storage in gigabytes"
-  default     = 20
-}
-
-variable "readonly_instance_type" {
-  description = "DB Instance type, for example: mysql.n1.micro.1. fall list is : https://www.alibabacloud.com/help/zh/doc-detail/26312.htm"
-  //default     = false
-}
-variable "readonly_zone_id" {
-  description = "The Zone to launch the DB instance. "
-}
-variable "new_db_readonly_instance" {
-  description = "Adding DB  DB readonly instance"
-  //default     = true
-}
 
 
 variable "security_group_name_regex" {
