@@ -4,11 +4,11 @@ output "this_db_description" {
 }
 
 output "this_db_instance_database_id" {
-  value =  module.mysql.this_db_instance_database_id
+  value = module.mysql.this_db_instance_database_id
 }
 
 output "this_db_instance_database_name" {
-  value =  module.mysql.this_db_instance_database_name
+  value = module.mysql.this_db_instance_database_name
 }
 
 output "this_db_instance_database_account" {
@@ -22,7 +22,7 @@ output "this_db_instance_database_accountprivilege" {
 #db_instance
 
 output "this_db_instance_id" {
-  value =module.mysql.this_db_instance_id
+  value = module.mysql.this_db_instance_id
 }
 
 output "this_db_instance_engine" {
@@ -42,7 +42,7 @@ output "this_db_instance_zone_id" {
 }
 
 output "this_db_instance_connection_string" {
-  value =  module.mysql.this_db_instance_connection_string
+  value = module.mysql.this_db_instance_connection_string
 }
 
 output "this_db_instance_port" {

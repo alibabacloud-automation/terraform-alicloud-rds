@@ -13,20 +13,22 @@ variable "instance_id" {
 
 variable "db_name" {
   description = "Name of the database requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 64 characters."
-  default     = ""
+  default     = "mydbtest"
 }
 
 variable "character_set" {
-  description = "Character set."
+  description = "Select utf8, gbk, latin1 or utf8mb4."
   default     = "utf8"
 }
 
 variable "name" {
   description = "Operation account requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 16 characters."
+  default     = "usertest"
 }
 
 variable "password" {
   description = "Operation password. It may consist of letters, digits, or underlines, with a length of 6 to 32 characters."
+  default     = "upw123"
 }
 
 variable "type" {
@@ -34,13 +36,9 @@ variable "type" {
   default     = "Normal"
 }
 
-##############################################################
-#variables for alicloud_db_account_privilege
-##############################################################
-
 variable "account_name" {
   description = "A specified account name."
-  default     = ""
+  default     = "testaccount"
 }
 
 variable "privilege" {
@@ -61,7 +59,7 @@ variable "engine" {
 }
 
 variable "engine_version" {
-  description = "The engine version to use"
+  description = "The engine version to use.Support ppas 9.3、10 versions"
   default     = "9.3"
 }
 
@@ -92,6 +90,7 @@ variable "period" {
 
 variable "zone_id" {
   description = "The Zone to launch the DB instance. "
+  default     = "cn-hangzhou-b"
 }
 
 variable "vpc_security_group_ids" {
@@ -115,6 +114,7 @@ variable "security_ips" {
 variable "connection_prefix" {
   description = "Prefix of an Internet connection string. It must be checked for uniqueness. It may consist of lowercase letters, numbers, and underlines, and must start with a letter and have no more than 30 characters. Default to + 'tf'."
   type        = string
+  default     = "testabc"
 }
 
 variable "port" {
@@ -150,27 +150,27 @@ variable "log_retention_period" {
 }
 #append
 variable "new_database" {
-  description = "Create DB.defailt to false"
+  description = "Create DB.default to false"
   default     = false
 }
 variable "new_instance" {
-  description = "Create instance.defailt to true"
+  description = "Create instance.default to true"
   default     = true
 }
 variable "new_account" {
-  description = "Create account.defailt to false"
+  description = "Create account.default to false"
   default     = false
 }
 variable "new_privilege" {
-  description = "Adding DB ReadOnly privilege.defailt to false"
+  description = "Adding DB ReadOnly privilege.default to false"
   default     = false
 }
 variable "new_backup_policy" {
-  description = "Adding DB backup policy.defailt to false"
+  description = "Adding DB backup policy.default to false"
   default     = false
 }
 variable "new_db_readonly_instance" {
-  description = "Adding DB  DB readonly instance.defailt to false"
+  description = "Adding DB  DB readonly instance.default to false"
   default     = false
 }
 variable "database_list" {
@@ -200,15 +200,8 @@ variable "skip_region_validation" {
   default     = false
 }
 
-
-
 variable "security_group_name_regex" {
   description = "A regex string to filter security groups by name."
-  default     = ""
-}
-
-variable "filter_with_name_regex" {
-  description = "A default filter applied to retrieve existing vswitches, security groups, and ecs instances by name regex."
   default     = ""
 }
 
@@ -216,17 +209,28 @@ variable "vswitch_resource_group_id" {
   description = "A id string to filter vswitches by resource group id."
   default     = ""
 }
-variable "filter_with_resource_group_id" {
-  description = "A default filter applied to retrieve existing vswitches, security groups, and ecs instances by resource group id."
-  default     = ""
-}
+
 variable "vswitch_tags" {
   description = "A mapping of tags to filter vswitches by tags."
   type        = map(string)
   default     = {}
 }
-variable "filter_with_tags" {
-  description = "A default filter applied to retrieve existing vswitches, security groups, and ecs instances by tags."
-  type        = map(string)
-  default     = {}
+
+variable "vswitch_name_regex" {
+  description = "A regex string to filter vswitches by name."
+  default     = ""
+}
+variable "new_connection" {
+  description = "Adding db connections"
+  default     = false
+}
+variable "connection_list" {
+  description = "add connection"
+  type        = list(map(string))
+  default     = []
+}
+variable "vswitch_ids" {
+  description = "A list of virtual switch IDs to launch in."
+  type        = list(string)
+  default     = []
 }

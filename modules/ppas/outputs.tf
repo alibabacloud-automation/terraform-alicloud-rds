@@ -1,10 +1,6 @@
 
-
-#db_instance
-
-
 output "this_db_instance_id" {
-  value =module.ppas.this_db_instance_id
+  value = module.ppas.this_db_instance_id
 }
 
 output "this_db_instance_engine" {
@@ -24,7 +20,7 @@ output "this_db_instance_zone_id" {
 }
 
 output "this_db_instance_connection_string" {
-  value =  module.ppas.this_db_instance_connection_string
+  value = module.ppas.this_db_instance_connection_string
 }
 
 output "this_db_instance_port" {

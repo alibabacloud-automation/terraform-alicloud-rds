@@ -1,14 +1,24 @@
+module "vpc" {
+  source = "alibaba/vpc/alicloud"
+
+  vpc_name     = "my_module_vpc"
+  vswitch_name = "my_module_vswitch"
+  vswitch_cidrs = [
+    "172.16.1.0/24",
+    "172.16.2.0/24"
+  ]
+}
+
 
 module "postgre_sql" {
   source               = "../../modules/postgre_sql"
-  region               = "cn-hangzhou"
+  region               = "cn-beijing"
   character_set        = "utf8"
-  connection_prefix    = ""
+  connection_prefix    = "testabc"
   engine               = data.alicloud_db_instance_engines.default.engine
   engine_version       = data.alicloud_db_instance_engines.default.engine_version
   instance_type        = data.alicloud_db_instance_classes.default.instance_classes.0.instance_class
-  instance_storage     = lookup(data.alicloud_db_instance_classes.default.instance_classes.0.storage_range, "min", null)
-  zone_id              = lookup(data.alicloud_db_instance_classes.default.instance_classes.0.zone_ids[0], "id")
+  instance_storage     = lookup(data.alicloud_db_instance_classes.default.instance_classes.0.storage_range, "min")
   instance_charge_type = "Postpaid"
   name                 = "dbuser"
   password             = "123456"
@@ -22,6 +32,8 @@ module "postgre_sql" {
   log_backup           = true
   log_retention_period = 7
   privilege            = "ReadWrite"
+  zone_id              = module.vpc.availability_zones[0]
+  vswitch_id           = module.vpc.vswitch_ids[0]
 
 }
 data "alicloud_db_instance_engines" "default" {
@@ -38,5 +50,4 @@ data "alicloud_db_instance_classes" "default" {
   engine_version       = "9.4"
   output_file          = "class.json"
 }
-
 

@@ -32,8 +32,5 @@ module "sql_server" {
   new_instance             = var.new_instance
   new_privilege            = var.new_privilege
   vswitch_id               = var.vswitch_id
-  readonly_engine          = ""
-  readonly_engine_version  = ""
-  readonly_instance_type   = ""
-  readonly_zone_id         = ""
+  new_connection           = var.new_connection
 }
