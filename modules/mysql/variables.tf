@@ -1,13 +1,10 @@
 variable "region" {
   description = "The region used to launch this module resources."
-  default     = "cn-shanghai"
+  default     = "cn-beijing"
 }
 variable "creation" {
   default = "Rds"
 }
-##############################################################
-#variables for alicloud_db_database
-##############################################################
 
 variable "instance_id" {
   description = "The Id of instance in which database belongs."
@@ -20,13 +17,10 @@ variable "db_name" {
 }
 
 variable "character_set" {
-  description = "Character set."
+  description = "Select utf8, gbk, latin1 or utf8mb4"
   default     = "utf8"
 }
 
-##############################################################
-#variables for alicloud_db_account
-##############################################################
 
 variable "name" {
   description = "Operation account requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 16 characters."
@@ -35,6 +29,7 @@ variable "name" {
 
 variable "password" {
   description = "Operation password. It may consist of letters, digits, or underlines, with a length of 6 to 32 characters."
+  default     = "upw123"
 }
 
 variable "type" {
@@ -42,13 +37,10 @@ variable "type" {
   default     = "Normal"
 }
 
-##############################################################
-#variables for alicloud_db_account_privilege
-##############################################################
 
 variable "account_name" {
   description = "A specified account name."
-  default     = ""
+  default     = "testaccount"
 }
 
 variable "privilege" {
@@ -62,23 +54,19 @@ variable "db_names" {
   default     = []
 }
 
-##############################################################
-#variables for db alicloud_db_instance
-##############################################################
-
 variable "engine" {
   description = "The database engine to use"
   default     = "MySQL"
 }
 
 variable "engine_version" {
-  description = "The engine version to use"
+  description = "The engine version to use，Support mysql 5.5, 5.6, 5.7, 8.0 versions"
   default     = "5.7"
 }
 
 variable "instance_storage" {
   description = "The allocated storage in gigabytes"
-  default     = 20
+  default     = "20"
 }
 
 variable "instance_type" {
@@ -122,25 +110,16 @@ variable "security_ips" {
   default     = []
 }
 
-##############################################################
-#variables for alicloud_db_connection
-##############################################################
-
-
-
 variable "connection_prefix" {
   description = "Prefix of an Internet connection string. It must be checked for uniqueness. It may consist of lowercase letters, numbers, and underlines, and must start with a letter and have no more than 30 characters. Default to + 'tf'."
   type        = string
+  default     = "testmysql"
 }
 
 variable "port" {
   description = " Internet connection port. Valid value: [3001-3999]. Default to 3306."
   default     = 3306
 }
-
-###############################################################
-#variables for alicloud_db_backup_policy
-##############################################################
 
 variable "backup_period" {
   description = "DB Instance backup period."
@@ -169,49 +148,52 @@ variable "log_retention_period" {
 }
 #append
 variable "new_database" {
-  description = "Create DB.defailt to true"
+  description = "Create DB.default to true"
   default     = true
 }
 variable "new_instance" {
-  description = "Create instance.defailt to true"
+  description = "Create instance.default to true"
   default     = true
 }
 variable "new_account" {
-  description = "Create account.defailt to true"
+  description = "Create account.default to true"
   default     = true
 }
 variable "new_privilege" {
-  description = "Adding DB ReadOnly privilege.defailt to true"
+  description = "Adding DB ReadOnly privilege.default to true"
   default     = true
 }
 variable "new_backup_policy" {
-  description = "Adding DB backup policy.defailt to true"
+  description = "Adding DB backup policy.default to true"
   default     = true
 }
 variable "new_db_readonly_instance" {
-  description = "Adding DB  DB readonly instance.defailt to true"
+  description = "Adding DB  DB readonly instance.default to true"
   default     = true
 }
 
 variable "readonly_engine" {
   description = "The database engine to use"
+  default     = "MySQL"
 }
 
 variable "readonly_engine_version" {
   description = "The engine version to use"
+  default     = "5.7"
 }
 
 variable "readonly_instance_storage" {
   description = "The allocated storage in gigabytes"
-  default     = 20
+  default     = "20"
 }
 
 variable "readonly_instance_type" {
   description = "DB Instance type, for example: mysql.n1.micro.1. fall list is : https://www.alibabacloud.com/help/zh/doc-detail/26312.htm"
-  //default     = false
+  default     = "rds.mysql.s2.large"
 }
 variable "readonly_zone_id" {
   description = "The Zone to launch the DB instance. "
+  default     = "cn-beijing-h"
 }
 variable "database_list" {
   description = "add databases"
@@ -246,26 +228,32 @@ variable "security_group_name_regex" {
   default     = ""
 }
 
-variable "filter_with_name_regex" {
-  description = "A default filter applied to retrieve existing vswitches, security groups, and ecs instances by name regex."
-  default     = ""
-}
-
 variable "vswitch_resource_group_id" {
   description = "A id string to filter vswitches by resource group id."
   default     = ""
 }
-variable "filter_with_resource_group_id" {
-  description = "A default filter applied to retrieve existing vswitches, security groups, and ecs instances by resource group id."
-  default     = ""
-}
+
 variable "vswitch_tags" {
   description = "A mapping of tags to filter vswitches by tags."
   type        = map(string)
   default     = {}
 }
-variable "filter_with_tags" {
-  description = "A default filter applied to retrieve existing vswitches, security groups, and ecs instances by tags."
-  type        = map(string)
-  default     = {}
+
+variable "vswitch_name_regex" {
+  description = "A regex string to filter vswitches by name."
+  default     = ""
+}
+variable "new_connection" {
+  description = "Adding db connections"
+  default     = false
+}
+variable "connection_list" {
+  description = "add connection"
+  type        = list(map(string))
+  default     = []
+}
+variable "vswitch_ids" {
+  description = "A list of virtual switch IDs to launch in."
+  type        = list(string)
+  default     = []
 }

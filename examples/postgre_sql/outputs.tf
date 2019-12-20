@@ -32,13 +32,6 @@ output "this_db_instance_security_ips" {
 output "this_db_instance_instance_type" {
   value = module.postgre_sql.this_db_instance_instance_type
 }
-/*output "this_db_databese_id" {
-  value = module.postgre_sql.this_db_instance_database_id
-}
-
-output "this_db_databese_name" {
-  value = module.postgre_sql.this_db_instance_database_name
-}*/
 
 
 

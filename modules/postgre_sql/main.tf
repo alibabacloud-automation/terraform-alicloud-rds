@@ -30,9 +30,6 @@ module "postgre_sql" {
   new_database             = var.new_database
   new_instance             = var.new_instance
   new_privilege            = var.new_privilege
-  readonly_engine          = ""
-  readonly_engine_version  = ""
-  readonly_instance_type   = ""
-  readonly_zone_id         = ""
   vswitch_id               = var.vswitch_id
+  new_connection           = var.new_connection
 }

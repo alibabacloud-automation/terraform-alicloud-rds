@@ -1,19 +1,19 @@
 
 module "mysql" {
-  source               = "../../"
-  region               = var.region
-  character_set        = var.character_set
-  connection_prefix    = var.connection_prefix
-  engine               = var.engine
-  engine_version       = var.engine_version
-  instance_type        = var.instance_type
-  instance_storage     = var.instance_storage
-  zone_id              = var.zone_id
-  instance_charge_type = var.instance_charge_type
-  name                 = var.name
-  password             = var.password
-  instance_name        = var.instance_name
-  vswitch_id           = var.vswitch_id
+  source                   = "../../"
+  region                   = var.region
+  character_set            = var.character_set
+  connection_prefix        = var.connection_prefix
+  engine                   = var.engine
+  engine_version           = var.engine_version
+  instance_type            = var.instance_type
+  instance_storage         = var.instance_storage
+  zone_id                  = var.zone_id
+  instance_charge_type     = var.instance_charge_type
+  name                     = var.name
+  password                 = var.password
+  instance_name            = var.instance_name
+  vswitch_id               = var.vswitch_id
   database_list            = var.database_list
   account_name             = var.account_name
   type                     = var.type
@@ -31,8 +31,4 @@ module "mysql" {
   new_database             = var.new_database
   new_instance             = var.new_instance
   new_privilege            = var.new_privilege
-  readonly_engine          = var.readonly_engine
-  readonly_engine_version  = var.readonly_engine_version
-  readonly_instance_type   = var.readonly_instance_type
-  readonly_zone_id         = var.readonly_zone_id
 }
