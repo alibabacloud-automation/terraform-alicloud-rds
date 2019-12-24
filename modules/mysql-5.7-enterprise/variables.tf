@@ -1,72 +1,20 @@
-#################
-# Provider
-#################
+
 variable "region" {
   description = "The region used to launch this module resources."
-  default     = ""
+  default     = "cn-beijing"
+}
+variable "creation" {
+  default = "Rds"
 }
 
-variable "profile" {
-  description = "The profile name as set in the shared credentials file. If not set, it will be sourced from the ALICLOUD_PROFILE environment variable."
-  default     = ""
-}
-variable "shared_credentials_file" {
-  description = "This is the path to the shared credentials file. If this is not set and a profile is specified, $HOME/.aliyun/config.json will be used."
-  default     = ""
-}
-
-variable "skip_region_validation" {
-  description = "Skip static validation of region ID. Used by users of alternative AlibabaCloud-like APIs or users w/ access to regions that are not public (yet)."
-  default     = false
-}
-
-#################
-# Rds Instance
-#################
-variable "create_instance" {
-  description = "Whether to create security group. If false, you can use a existing RDS instance by setting `existing_instance_id`."
-  default     = true
-}
-
-variable "engine" {
-  description = "RDS Database type. Value options: MySQL, SQLServer, PostgreSQL, and PPAS"
-  default     = ""
-}
-
-variable "engine_version" {
-  description = "RDS Database version. Value options can refer to the latest docs [CreateDBInstance](https://www.alibabacloud.com/help/doc-detail/26228.htm) `EngineVersion`"
-  default     = ""
-}
-
-variable "db_instance_class" {
-  description = "RDS Instance type. For details, see [Instance Types](https://www.alibabacloud.com/help/doc-detail/26312.htm)."
-  default     = ""
-}
-
-variable "db_instance_storage" {
-  description = "The storage capacity of the instance. Unit: GB. The storage capacity increases at increments of 5 GB. For more information, see [Instance Types](https://www.alibabacloud.com/help/doc-detail/26312.htm)."
-  type        = number
-  default     = 20
-}
-
-variable "instance_name" {
-  description = "The name of DB instance. A random name prefixed with 'terraform-rds-' will be set if it is empty."
-  default     = ""
-}
-
-variable "instance_charge_type" {
-  description = "Valid values are `Prepaid`, `Postpaid`, Default to `Postpaid`."
-  default     = "Postpaid"
-}
-
-variable "existing_instance_id" {
-  description = "The Id of an existing RDS instance. If set, the `create` will be ignored."
+variable "instance_id" {
+  description = "The Id of instance in which database belongs."
   default     = ""
 }
 
 variable "db_name" {
   description = "Name of the database requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 64 characters."
-  default     = "dbtestname"
+  default     = "myTestDB"
 }
 
 variable "character_set" {
@@ -74,9 +22,10 @@ variable "character_set" {
   default     = "utf8"
 }
 
+
 variable "name" {
   description = "Operation account requiring a uniqueness check. It may consist of lower case letters, numbers, and underlines, and must start with a letter and have no more than 16 characters."
-  default     = "user1"
+  default     = "dbuser"
 }
 
 variable "password" {
@@ -92,7 +41,7 @@ variable "type" {
 
 variable "account_name" {
   description = "A specified account name."
-  default     = "account1"
+  default     = "testaccount"
 }
 
 variable "privilege" {
@@ -106,6 +55,16 @@ variable "db_names" {
   default     = []
 }
 
+variable "engine" {
+  description = "The database engine to use"
+  default     = "MySQL"
+}
+
+variable "engine_version" {
+  description = "The engine version to use，Support mysql 5.5, 5.6, 5.7, 8.0 versions"
+  default     = "5.7"
+}
+
 variable "instance_storage" {
   description = "The allocated storage in gigabytes"
   default     = "20"
@@ -116,6 +75,16 @@ variable "instance_type" {
   default     = "rds.mysql.s2.large"
 }
 
+variable "instance_name" {
+  description = " The name of DB instance. It a string of 2 to 256 characters"
+  default     = "myTestInstance"
+}
+
+variable "instance_charge_type" {
+  description = "Valid values are Prepaid, Postpaid, Default to Postpaid"
+  default     = "Postpaid"
+}
+
 variable "period" {
   description = "The duration that you will buy DB instance (in month). It is valid when instance_charge_type is PrePaid. Valid values: [1~9], 12, 24, 36. Default to 1"
   default     = 1
@@ -123,7 +92,6 @@ variable "period" {
 
 variable "zone_id" {
   description = "The Zone to launch the DB instance. "
-  default     = "cn-hangzhou-b"
 }
 
 variable "vpc_security_group_ids" {
@@ -143,15 +111,10 @@ variable "security_ips" {
   default     = []
 }
 
-variable "allocate_public_connection" {
-  description = "Whether to allocate public connection for a RDS instance. If true, the connection_prefix can not be empty."
-  type        = bool
-  default     = true
-}
 variable "connection_prefix" {
-  description = "Prefix of an Internet connection string. A random name prefixed with 'tf-rds-' will be set if it is empty."
+  description = "Prefix of an Internet connection string. It must be checked for uniqueness. It may consist of lowercase letters, numbers, and underlines, and must start with a letter and have no more than 30 characters. Default to + 'tf'."
   type        = string
-  default     = ""
+  default     = "testmysql"
 }
 
 variable "port" {
@@ -185,27 +148,30 @@ variable "log_retention_period" {
   default     = 7
 }
 #append
-variable "create_database" {
-  default = true
+variable "new_database" {
+  description = "Create DB.default to true"
+  default     = true
 }
-
-variable "create_account" {
-  default = true
+variable "new_instance" {
+  description = "Create instance.default to true"
+  default     = true
 }
-variable "databases" {
-  description = "add databases"
-  type        = list(map(string))
-  default     = []
+variable "new_account" {
+  description = "Create account.default to true"
+  default     = true
 }
-variable "db_description" {
-  description = "Description of the database"
-  default     = ""
+variable "new_privilege" {
+  description = "Adding DB ReadOnly privilege.default to true"
+  default     = true
 }
-variable "db_character_set" {
-  description = "Character set."
-  default     = "utf8"
+variable "new_backup_policy" {
+  description = "Adding DB backup policy.default to true"
+  default     = true
 }
-
+variable "new_db_readonly_instance" {
+  description = "Adding DB  DB readonly instance.default to true"
+  default     = true
+}
 
 variable "readonly_engine" {
   description = "The database engine to use"
@@ -228,13 +194,56 @@ variable "readonly_instance_type" {
 }
 variable "readonly_zone_id" {
   description = "The Zone to launch the DB instance. "
-  default     = "cn-hangzhou-b"
+  default     = "cn-beijing-h"
 }
-variable "new_db_readonly_instance" {
-  description = "Adding DB   readonly instance"
+variable "database_list" {
+  description = "add databases"
+  type        = list(map(string))
+  default     = []
+}
+variable "db_description" {
+  description = "Description of the database"
+  default     = ""
+}
+variable "db_character_set" {
+  description = "Character set."
+  default     = "utf8"
+}
+variable "profile" {
+  description = "The profile name as set in the shared credentials file. If not set, it will be sourced from the ALICLOUD_PROFILE environment variable."
+  default     = ""
+}
+variable "shared_credentials_file" {
+  description = "This is the path to the shared credentials file. If this is not set and a profile is specified, $HOME/.aliyun/config.json will be used."
+  default     = ""
+}
+
+variable "skip_region_validation" {
+  description = "Skip static validation of region ID. Used by users of alternative AlibabaCloud-like APIs or users w/ access to regions that are not public (yet)."
   default     = false
 }
 
+
+variable "security_group_name_regex" {
+  description = "A regex string to filter security groups by name."
+  default     = ""
+}
+
+variable "vswitch_resource_group_id" {
+  description = "A id string to filter vswitches by resource group id."
+  default     = ""
+}
+
+variable "vswitch_tags" {
+  description = "A mapping of tags to filter vswitches by tags."
+  type        = map(string)
+  default     = {}
+}
+
+variable "vswitch_name_regex" {
+  description = "A regex string to filter vswitches by name."
+  default     = ""
+}
 variable "new_connection" {
   description = "Adding db connections"
   default     = false
@@ -244,7 +253,6 @@ variable "connection_list" {
   type        = list(map(string))
   default     = []
 }
-
 variable "vswitch_ids" {
   description = "A list of virtual switch IDs to launch in."
   type        = list(string)
