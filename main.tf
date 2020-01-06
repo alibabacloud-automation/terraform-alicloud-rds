@@ -21,10 +21,12 @@ resource "alicloud_db_instance" "this" {
 resource "alicloud_db_backup_policy" "this" {
   count                = local.create_more_resources ? 1 : 0
   instance_id          = local.this_instance_id
-  retention_period     = var.backup_retention_period
-  backup_time          = var.preferred_backup_time
-  backup_period        = var.preferred_backup_period
-  log_retention_period = var.log_backup_retention_period
+  retention_period     = local.retention_period
+  backup_time          = local.backup_time
+  backup_period        = local.backup_period
+  log_retention_period = local.log_retention_period
+  enable_backup_log    = var.enable_backup_log
+
 }
 
 

@@ -154,7 +154,7 @@ variable "backup_retention_period" {
   default     = 7
 }
 
-variable "log_backup" {
+variable "enable_backup_log" {
   description = "Whether to backup instance log. Default to true."
   type        = bool
   default     = false
@@ -187,3 +187,55 @@ variable "account_name" {
   description = "Name of a new database account. It should be set when create_account = true."
   default     = ""
 }
+
+
+# Depreceted parameters
+variable "backup_time" {
+  description = "(Deprecated) It has been deprecated from version 2.0.0 and use `preferred_backup_time` instead."
+  default     = "02:00Z-03:00Z"
+}
+
+variable "db_name" {
+  description = "(Deprecated) It has been deprecated from version 2.0.0 ."
+  default     = ""
+}
+
+variable "retention_period" {
+  description = "(Deprecated) It has been deprecated from version 2.0.0 and use `backup_retention_period` instead."
+  type        = number
+  default     = 7
+}
+variable "zone_id" {
+  description = "(Deprecated) It has been deprecated from version 2.0.0 ."
+  default     = ""
+}
+
+variable "backup_period" {
+  description = "(Deprecated) It has been deprecated from version 2.0.0 and use `preferred_backup_period` instead."
+  type        = list(string)
+  default     = []
+}
+
+variable "db_names" {
+  description = "(Deprecated) It has been deprecated from version 2.0.0 ."
+  type        = list(string)
+  default     = []
+}
+
+variable "instance_id" {
+  description = "(Deprecated) It has been deprecated from version 2.0.0 ."
+  default     = ""
+}
+variable "log_retention_period" {
+  description = "(Deprecated) It has been deprecated from version 2.0.0 and use `log_backup_retention_period` instead."
+  type        = number
+  default     = 7
+}
+variable "vpc_security_group_ids" {
+  description = "(Deprecated) It has been deprecated from version 2.0.0 and use `security_group_ids` instead."
+  type        = list(string)
+  default     = []
+}
+
+
+
