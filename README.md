@@ -1,4 +1,4 @@
-Alicloud RDS Instance Terraform Module   
+# Alibaba Cloud RDS Instance Terraform Module   
 terraform-alicloud-rds
 ---
 
@@ -22,43 +22,42 @@ You can use this in your terraform template with the following steps.
 1. Adding a module resource to your template, e.g. main.tf
     
 ```hcl
-module "rds" {
-  source = "terraform-alicloud-modules/rds/alicloud"
+module "mysql" {
+  source            = "../../modules/mysql-5.7-basic"
+  region            = var.region
+  connection_prefix = "developmentabc"
+  vswitch_id        = data.alicloud_vpcs.default.vpcs.0.vswitch_ids.0
+  instance_name     = "myDBInstance"
+  instance_type     = "rds.mysql.s2.large"
+  security_ips = [
+    "11.193.54.0/24",
+    "101.37.74.0/24",
+    "10.137.42.0/24",
+  "121.43.18.0/24"]
+  preferred_backup_period = ["Monday", "Wednesday"]
+  preferred_backup_time       = "00:00Z-01:00Z"
+  backup_retention_period     = 7
+  enable_backup_log           = true
+  log_backup_retention_period = 7
+  ###########
+  #databases#
+  ###########
+  account_name = "account_name1"
+  password     = "1234abc"
+  privilege    = "ReadWrite"
+  databases = [
 
-  #variables for db instance
-  
-  engine                       = "MySQL"
-  engine_version               = "5.7"
-  instance_type                = "mysql.n1.micro.1"
-  instance_storage             = "20"
-  instance_name                = "myTestDBInstance"
-  instance_charge_type         = "Postpaid"
-  zone_id                      = "cn-hangzhou-f"
-  security_ips                 = ["11.193.54.0/24","101.37.74.0/24","10.137.42.0/24","121.43.18.0/24"]
-
-  #variables for db account
-  
-  account_name                 = "dbuser"
-  password                     = "testUser123"
-  type                         = "Normal"
-
-  #variables for account_privilege
-
-  privilege                    = "ReadWrite"
-
-  #variables for database
-
-  db_name                      = "tf_database"
-  character_set                = "utf8"
-
-  #variables for backup
-
-  backup_period                = ["Monday", "Wednesday"]
-  backup_time                  = "02:00Z-03:00Z"
-  retention_period             = 7
-  log_backup                   = true
-  log_retention_period         = 7
-
+    {
+      name          = "dbuserv1"
+      character_set = "utf8"
+      description   = "db1"
+    },
+    {
+      name          = "dbuserv2"
+      character_set = "utf8"
+      description   = "db2"
+    },
+  ]
 }
 ```
 

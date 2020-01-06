@@ -1,4 +1,4 @@
-# Complete RDS example for MySQL
+# Alibaba Cloud RDS example for MySQL Databases
 
 Configuration in this directory creates set of RDS resources including DB instance, DB account and Datebase.
 
@@ -20,15 +20,7 @@ Note that this example may create resources which cost money. Run `terraform des
 
 | Name | Description |
 |------|-------------|
-| this_db_instance_id     |        instance ID created     |
-| this_db_instance_engine     |    instance engine created         |
-| this_db_instance_engine_version     |   instance engine version created          |
-| this_db_instance_instance_name     |     instance name created        |
-| this_db_instance_instance_type     |      instance type created       |
-| this_db_instance_zone_id     |       instance zone ID created      |
-| this_db_instance_connection_string     |     intance public net connection string created        |
-| this_db_instance_port     |     instance connection port created         |
-| this_db_instance_security_ips     |    instance security ips configured         |
+| this_db_description     |        databases's description     |
 | this_db_instance_database_id    |      database ID created in this instance        |
 | this_db_instance_database_name    |     database name created in this instance         |
 | this_db_instance_database_account     |    database account associated in this instance          |

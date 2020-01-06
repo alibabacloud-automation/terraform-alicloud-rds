@@ -1,68 +1,53 @@
 
-output "this_db_description" {
-  value = alicloud_db_database.db_database.*.description
+output "this_database_description" {
+  value = module.databases.this_database_description
 }
-output "this_db_instance_database_id" {
-  value = alicloud_db_database.db_database.*.id
-}
-
-output "this_db_instance_database_name" {
-  value = alicloud_db_database.db_database.*.name
+output "this_database_id" {
+  value = module.databases.this_database_account
 }
 
-output "this_db_instance_database_account" {
-  value = alicloud_db_account_privilege.db_account_privilege.*.account_name
+output "this_database_name" {
+  value = module.databases.this_database_name
 }
 
-output "this_db_instance_database_accountprivilege" {
-  value = alicloud_db_account_privilege.db_account_privilege.*.privilege
+output "this_database_account" {
+  value = module.databases.this_database_account
 }
 
-#db_instance
-locals {
-  this_db_instance_id                = alicloud_db_instance.db_instance.*.id
-  this_db_instance_engine            = alicloud_db_instance.db_instance.*.engine
-  this_db_instance_engine_version    = alicloud_db_instance.db_instance.*.engine_version
-  this_db_instance_instance_name     = alicloud_db_instance.db_instance.*.instance_name
-  this_db_instance_instance_type     = alicloud_db_instance.db_instance.*.instance_type
-  this_db_instance_zone_id           = alicloud_db_instance.db_instance.*.zone_id
-  this_db_instance_connection_string = alicloud_db_instance.db_instance.*.connection_string
-  this_db_instance_port              = alicloud_db_instance.db_instance.*.port
-  this_db_instance_security_ips      = alicloud_db_instance.db_instance.*.security_ips
+output "this_database_account_privilege" {
+  value = module.databases.this_database_account_privilege
 }
-
 output "this_db_instance_id" {
-  value = alicloud_db_instance.db_instance.*.id
+  value = alicloud_db_instance.this.*.id
 }
 
 output "this_db_instance_engine" {
-  value = alicloud_db_instance.db_instance.*.engine
+  value = alicloud_db_instance.this.*.engine
 }
 
 output "this_db_instance_engine_version" {
-  value = alicloud_db_instance.db_instance.*.engine_version
+  value = alicloud_db_instance.this.*.engine_version
 }
 
 output "this_db_instance_instance_name" {
-  value = alicloud_db_instance.db_instance.*.instance_name
-}
-
-output "this_db_instance_zone_id" {
-  value = alicloud_db_instance.db_instance.*.zone_id
+  value = alicloud_db_instance.this.*.instance_name
 }
 
 output "this_db_instance_connection_string" {
-  value = alicloud_db_instance.db_instance.*.connection_string
+  value = alicloud_db_instance.this.*.connection_string
 }
 
 output "this_db_instance_port" {
-  value = alicloud_db_instance.db_instance.*.port
+  value = alicloud_db_instance.this.*.port
 }
 
 output "this_db_instance_security_ips" {
-  value = alicloud_db_instance.db_instance.*.security_ips
+  value = alicloud_db_instance.this.*.security_ips
 }
 
 output "this_db_instance_instance_type" {
-  value = alicloud_db_instance.db_instance.*.instance_type
+  value = alicloud_db_instance.this.*.instance_type
+}
+output "this_db_instance_zone_id" {
+  value = alicloud_db_instance.this.*.zone_id
 }
