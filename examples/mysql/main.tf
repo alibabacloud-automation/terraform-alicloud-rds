@@ -13,7 +13,7 @@ module "mysql" {
   connection_prefix = "developmentabc"
   vswitch_id        = data.alicloud_vpcs.default.vpcs.0.vswitch_ids.0
   instance_name     = "myDBInstance"
-  //instance_type     = "rds.mysql.s2.large"
+
   security_ips = [
     "11.193.54.0/24",
     "101.37.74.0/24",

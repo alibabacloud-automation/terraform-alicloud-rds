@@ -1,28 +1,25 @@
-Alibaba Cloud RDS Instance Terraform Module  
 terraform-alicloud-rds
 =====================================================================
 
-English | [简体中文](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/blob/master/README-CN.md)
 
-Terraform module which creates rds instance(s) on Alibaba Cloud. 
+本 Module 用于在阿里云的 VPC 下创建一个[rds云数据库](https://help.aliyun.com/document_detail/26092.html). 
 
-These types of resources are supported:
+本 Module 支持创建以下资源:
 
-* [Alicloud_db_instance](https://www.terraform.io/docs/providers/alicloud/r/db_instance.html)
-* [Alicloud_db_account](https://www.terraform.io/docs/providers/alicloud/r/db_account.html)
-* [Alicloud_db_database](https://www.terraform.io/docs/providers/alicloud/r/db_database.html)
-* [Alicloud_db_backup_policy](https://www.terraform.io/docs/providers/alicloud/r/db_backup_policy.html)
+* [云服务器rds实例_(db_instance)](https://www.terraform.io/docs/providers/alicloud/r/db_instance.html)
+* [云服务器account实例_(db_account)](https://www.terraform.io/docs/providers/alicloud/r/db_account.html)
+* [云服务器database实例_(db_database)](https://www.terraform.io/docs/providers/alicloud/r/db_database.html)
+* [云服务器backup_policy实例_(db_backup_policy)](https://www.terraform.io/docs/providers/alicloud/r/db_backup_policy.html)
 
-## Terraform versions
+## Terraform 版本
 
-For Terraform 0.12 use version `v2.*` and `v1.3.0` of this module.
+如果您正在使用 Terraform 0.12，请使用此模块的`v2.*` and `v1.3.0` 版本。
 
-If you are using Terraform 0.11 you can use versions `v1.2.*`.
+如果您正在使用 Terraform 0.11，请使用此模块的`v1.2.*` 版本.
 
-## Usage
+## 用法
 
 ```hcl
-
 module "mysql" {
   source            = "terraform-alicloud-modules/rds/alicloud"
   engine            = "MySQL"
@@ -71,27 +68,26 @@ module "mysql" {
 }
 ```
 
-## Examples
+## 示例
 
-* [Mysql example](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/tree/master/examples/mysql)
-* [PostSQL example](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/tree/master/examples/postgre_sql)
-* [PPAS example](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/tree/master/examples/ppas)
-* [SQL Server example](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/tree/master/examples/sql_server)
+* [Mysql 实例完整创建示例创建示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/tree/master/examples/mysql)
+* [PostSQL 实例完整创建示例创建示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/tree/master/examples/postgre_sql)
+* [PPAS 实例完整创建示例创建示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/tree/master/examples/ppas)
+* [SQL Server 实例完整创建示例创建示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/tree/master/examples/sql_server)
 
-## Notes
+## 注意事项
 
-* This module using AccessKey and SecretKey are from `profile` and `shared_credentials_file`.
-If you have not set them yet, please install [aliyun-cli](https://github.com/aliyun/aliyun-cli#installation) and configure it.
+* 本 Module 使用的 AccessKey 和 SecretKey 可以直接从 `profile` 和 `shared_credentials_file` 中获取。如果未设置，可通过下载安装 [aliyun-cli](https://github.com/aliyun/aliyun-cli#installation) 后进行配置.
 
-Authors
+作者
 -------
 Created and maintained by He Guimin(@xiaozhu36, heguimin36@163.com)
 
-License
+许可
 ----
 Apache 2 Licensed. See LICENSE for full details.
 
-Reference
+参考
 ---------
 * [Terraform-Provider-Alicloud Github](https://github.com/terraform-providers/terraform-provider-alicloud)
 * [Terraform-Provider-Alicloud Release](https://releases.hashicorp.com/terraform-provider-alicloud/)
