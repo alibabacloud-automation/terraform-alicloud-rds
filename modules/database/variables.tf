@@ -17,14 +17,19 @@ variable "shared_credentials_file" {
 
 variable "skip_region_validation" {
   description = "Skip static validation of region ID. Used by users of alternative AlibabaCloud-like APIs or users w/ access to regions that are not public (yet)."
+  type        = bool
   default     = false
 }
 
 variable "create_database" {
-  default = true
+  description = "Whether to create multiple databases."
+  type        = bool
+  default     = true
 }
 
 variable "create_account" {
+  description = "Whether to create a new account"
+  type        = bool
   default = true
 }
 variable "db_instance_id" {
@@ -32,10 +37,9 @@ variable "db_instance_id" {
   default     = ""
 }
 
-
 variable "password" {
   description = "Operation password. It may consist of letters, digits, or underlines, with a length of 6 to 32 characters."
-  default     = "upw123"
+  default     = ""
 }
 
 variable "type" {
@@ -45,8 +49,8 @@ variable "type" {
 
 
 variable "account_name" {
-  description = "A specified account name."
-  default     = "testaccount"
+  description = "Name of a new database account. It should be set when create_account = true."
+  default     = ""
 }
 
 variable "privilege" {
@@ -55,7 +59,11 @@ variable "privilege" {
 }
 
 variable "databases" {
-  description = "add databases"
+  description = "A list mapping used to add multiple databases. Each item supports keys: name, character_set and description."
   type        = list(map(string))
   default     = []
+}
+variable "instance_storage_type" {
+  description = "The storage type of the instance"
+  default = "cloud_ssd"
 }

@@ -1,4 +1,4 @@
-# Complete RDS example for MySQL
+# MySql-8.0-HighAvailability Alibaba Cloud Rds Terraform Module
 
 Configuration in this directory creates set of RDS resources including DB instance, DB account and Datebase.
 

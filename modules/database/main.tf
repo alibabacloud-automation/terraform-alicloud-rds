@@ -15,7 +15,7 @@ resource "alicloud_db_database" "this" {
   description   = lookup(var.databases[count.index], "description")
 }
 resource "alicloud_db_account" "this" {
-  count       = var.create_account ? 1 : 0
+  count       = var.create_account && var.account_name !="" ? 1 : 0
   instance_id = var.db_instance_id
   name        = var.account_name
   password    = var.password
