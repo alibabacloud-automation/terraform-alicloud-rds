@@ -22,15 +22,15 @@ variable "skip_region_validation" {
 }
 
 variable "create_database" {
-  description = "Whether to create multiple databases."
+  description = "Whether to create multiple databases. If true, the `databases` should not be empty."
   type        = bool
   default     = true
 }
 
 variable "create_account" {
-  description = "Whether to create a new account"
+  description = "Whether to create a new account. If true, the `account_name` should not be empty."
   type        = bool
-  default = true
+  default     = true
 }
 variable "db_instance_id" {
   description = "The Id of instance in which database belongs."
@@ -43,7 +43,7 @@ variable "password" {
 }
 
 variable "type" {
-  description = "Privilege type of account.Normal: Common privilege. Super: High privilege.Default to Normal. It is is valid for MySQL 5.5/5.6 only."
+  description = "Privilege type of account.Normal: Common privilege. Super: High privilege.Default to Normal."
   default     = "Normal"
 }
 
@@ -59,11 +59,11 @@ variable "privilege" {
 }
 
 variable "databases" {
-  description = "A list mapping used to add multiple databases. Each item supports keys: name, character_set and description."
+  description = "A list mapping used to add multiple databases. Each item supports keys: name, character_set and description. It should be set when create_database = true."
   type        = list(map(string))
   default     = []
 }
 variable "instance_storage_type" {
   description = "The storage type of the instance"
-  default = "cloud_ssd"
+  default     = "cloud_ssd"
 }

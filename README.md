@@ -4,7 +4,7 @@ terraform-alicloud-rds
 
 English | [简体中文](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/blob/master/README-CN.md)
 
-Terraform module which creates rds instance(s) on Alibaba Cloud. 
+Terraform module which creates RDS instance(s) on Alibaba Cloud. 
 
 These types of resources are supported:
 
@@ -15,9 +15,7 @@ These types of resources are supported:
 
 ## Terraform versions
 
-For Terraform 0.12 use version `v2.*` and `v1.3.0` of this module.
-
-If you are using Terraform 0.11 you can use versions `v1.2.*`.
+This module requires Terraform 0.12.
 
 ## Usage
 
@@ -28,7 +26,6 @@ module "mysql" {
   engine            = "MySQL"
   engine_version    = "8.0"
   region            = "cn-hangzhou"
-  zone_id           = "cn-hangzhou-h"
   connection_prefix = "developmentabc"
   vswitch_id        = "vsw-bp1tili2u5kpgdk84osjk"
   instance_storage  = 20
@@ -38,9 +35,9 @@ module "mysql" {
   instance_charge_type       = "Postpaid"
   security_ips = [
     "11.193.54.0/24",
-    "101.37.74.0/24",
-    "10.137.42.0/24",
-  "121.43.18.0/24"]
+    "121.43.18.0/24"
+    ]
+  
   ###############
   #backup_policy#
   ###############
@@ -49,6 +46,7 @@ module "mysql" {
   backup_retention_period     = 7
   log_backup_retention_period = 7
   enable_backup_log           = true
+  
   ###########
   #databases#
   ###########

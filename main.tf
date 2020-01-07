@@ -17,6 +17,7 @@ resource "alicloud_db_instance" "this" {
   period               = var.period
   security_ips         = var.security_ips
   vswitch_id           = var.vswitch_id
+  security_group_id    = join(",", slice(local.security_group_ids, 0, 3))
 }
 resource "alicloud_db_backup_policy" "this" {
   count                = local.create_more_resources ? 1 : 0
@@ -26,7 +27,6 @@ resource "alicloud_db_backup_policy" "this" {
   backup_period        = local.backup_period
   log_retention_period = local.log_retention_period
   enable_backup_log    = var.enable_backup_log
-
 }
 
 
@@ -34,6 +34,7 @@ resource "alicloud_db_connection" "db_connection" {
   count             = local.create_more_resources && var.allocate_public_connection && var.connection_prefix != "" ? 1 : 0
   instance_id       = local.this_instance_id
   connection_prefix = var.connection_prefix
+  port              = var.port
 }
 
 module "databases" {
