@@ -13,9 +13,7 @@ terraform-alicloud-rds
 
 ## Terraform 版本
 
-如果您正在使用 Terraform 0.12，请使用此模块的`v2.*` and `v1.3.0` 版本。
-
-如果您正在使用 Terraform 0.11，请使用此模块的`v1.2.*` 版本.
+本模板要求使用版本 Terraform 0.12。
 
 ## 用法
 
@@ -25,7 +23,6 @@ module "mysql" {
   engine            = "MySQL"
   engine_version    = "8.0"
   region            = "cn-hangzhou"
-  zone_id           = "cn-hangzhou-h"
   connection_prefix = "developmentabc"
   vswitch_id        = "vsw-bp1tili2u5kpgdk84osjk"
   instance_storage  = 20
@@ -35,9 +32,9 @@ module "mysql" {
   instance_charge_type       = "Postpaid"
   security_ips = [
     "11.193.54.0/24",
-    "101.37.74.0/24",
-    "10.137.42.0/24",
-  "121.43.18.0/24"]
+    "121.43.18.0/24"
+    ]
+    
   ###############
   #backup_policy#
   ###############
@@ -46,6 +43,7 @@ module "mysql" {
   backup_retention_period     = 7
   log_backup_retention_period = 7
   enable_backup_log           = true
+  
   ###########
   #databases#
   ###########
