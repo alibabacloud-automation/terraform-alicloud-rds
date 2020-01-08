@@ -86,9 +86,9 @@ variable "security_ips" {
   default     = []
 }
 variable "tags" {
-    description = "A mapping of tags to assign to the rds."
-    type        = map(string)
-    default     = {}
+  description = "A mapping of tags to assign to the rds."
+  type        = map(string)
+  default     = {}
 }
 
 #################

@@ -51,7 +51,7 @@ output "this_db_instance_security_group_ids" {
 }
 output "this_db_instance_tags" {
   description = "Rds instance tags"
-  value = alicloud_db_instance.this.*.tags
+  value       = alicloud_db_instance.this.*.tags
 }
 
 #################

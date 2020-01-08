@@ -51,7 +51,7 @@ output "this_db_instance_security_group_ids" {
 }
 output "this_db_instance_tags" {
   description = "Rds instance tags"
-  value = module.mysql.this_db_instance_tags
+  value       = module.mysql.this_db_instance_tags
 }
 
 #################
@@ -63,7 +63,7 @@ output "this_db_instance_connection_string" {
 }
 output "this_db_instance_port" {
   description = "Rds instance public connection string"
-  value       =module.mysql.this_db_instance_port
+  value       = module.mysql.this_db_instance_port
 }
 output "this_db_instance_connection_ip_address" {
   description = "Rds instance public connection string's ip address"

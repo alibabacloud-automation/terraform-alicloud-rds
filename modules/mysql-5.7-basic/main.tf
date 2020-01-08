@@ -18,21 +18,21 @@ data "alicloud_db_instance_classes" "default" {
   storage_type   = var.instance_storage_type
 }
 module "mysql" {
-  source                      = "../../"
-  region                      = var.region
+  source = "../../"
+  region = var.region
   #################
   # Rds Instance
   #################
-  engine                      = local.engine
-  engine_version              = local.engine_version
-  instance_type               = var.instance_type != "" ? var.instance_type : data.alicloud_db_instance_classes.default.instance_classes.0.instance_class
-  instance_storage            = var.instance_storage != "" ? var.instance_storage : lookup(data.alicloud_db_instance_classes.default.instance_classes.0.storage_range, "min")
-  instance_charge_type        = var.instance_charge_type
-  instance_name               = var.instance_name
-  security_group_ids          = var.security_group_ids
-  vswitch_id                  = var.vswitch_id
-  security_ips                = var.security_ips
-  tags                        = var.tags
+  engine               = local.engine
+  engine_version       = local.engine_version
+  instance_type        = var.instance_type != "" ? var.instance_type : data.alicloud_db_instance_classes.default.instance_classes.0.instance_class
+  instance_storage     = var.instance_storage != "" ? var.instance_storage : lookup(data.alicloud_db_instance_classes.default.instance_classes.0.storage_range, "min")
+  instance_charge_type = var.instance_charge_type
+  instance_name        = var.instance_name
+  security_group_ids   = var.security_group_ids
+  vswitch_id           = var.vswitch_id
+  security_ips         = var.security_ips
+  tags                 = var.tags
   #################
   # Rds Backup policy
   #################
@@ -44,20 +44,20 @@ module "mysql" {
   #################
   # Rds Connection
   #################
-  port                        = var.port
-  connection_prefix           = var.connection_prefix
-  allocate_public_connection  = var.allocate_public_connection
+  port                       = var.port
+  connection_prefix          = var.connection_prefix
+  allocate_public_connection = var.allocate_public_connection
   #################
   # Rds Database account
   #################
-  type                        = var.type
-  privilege                   = var.privilege
-  create_account              = var.create_account
-  account_name                = var.account_name
-  password                    = var.password
+  type           = var.type
+  privilege      = var.privilege
+  create_account = var.create_account
+  account_name   = var.account_name
+  password       = var.password
   #################
   # Rds Database
   #################
-  create_database             = var.create_database
-  databases                   = var.databases
+  create_database = var.create_database
+  databases       = var.databases
 }
