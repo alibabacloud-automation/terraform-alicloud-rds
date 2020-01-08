@@ -20,15 +20,15 @@ module "sql_server" {
   #################
   # Rds Instance
   #################
-  vswitch_id        = data.alicloud_vpcs.default.vpcs.0.vswitch_ids.0
-  instance_type     = "mssql.x4.medium.s2"
-  instance_name     = "myDBInstancesql"
+  vswitch_id    = data.alicloud_vpcs.default.vpcs.0.vswitch_ids.0
+  instance_type = "mssql.x4.medium.s2"
+  instance_name = "myDBInstancesql"
   security_ips = [
     "11.193.54.0/24",
     "101.37.74.0/24",
     "10.137.42.0/24",
   "121.43.18.0/24"]
-  security_group_ids          = [module.security_group.this_security_group_id]
+  security_group_ids = [module.security_group.this_security_group_id]
   #################
   # Rds Backup policy
   #################

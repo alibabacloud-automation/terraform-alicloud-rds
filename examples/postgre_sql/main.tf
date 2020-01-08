@@ -21,10 +21,10 @@ module "postgre_sql" {
   #################
   # Rds Instance
   #################
-  vswitch_id        = data.alicloud_vpcs.default.vpcs.0.vswitch_ids.0
-  instance_type     = "rds.pg.c1.large"
-  instance_name     = "myDBInstance"
-  security_group_ids    = [module.security_group.this_security_group_id]
+  vswitch_id         = data.alicloud_vpcs.default.vpcs.0.vswitch_ids.0
+  instance_type      = "rds.pg.c1.large"
+  instance_name      = "myDBInstance"
+  security_group_ids = [module.security_group.this_security_group_id]
   security_ips = [
     "11.193.54.0/24",
     "101.37.74.0/24",

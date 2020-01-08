@@ -18,7 +18,7 @@ resource "alicloud_db_instance" "this" {
   security_ips         = var.security_ips
   vswitch_id           = var.vswitch_id
   tags                 = var.tags
-  security_group_id    = length(local.security_group_ids[0]) > 0 ? join(",",local.security_group_ids) : ""
+  security_group_id    = length(local.security_group_ids[0]) > 0 ? join(",", local.security_group_ids) : ""
 }
 resource "alicloud_db_backup_policy" "this" {
   count                = local.create_more_resources ? 1 : 0

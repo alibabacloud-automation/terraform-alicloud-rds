@@ -35,6 +35,11 @@ module "mysql" {
     "121.43.18.0/24"
     ]
     
+  tags = {
+    Created      = "Terraform"
+    Environment = "dev"
+  }
+  
   ###############
   #backup_policy#
   ###############
