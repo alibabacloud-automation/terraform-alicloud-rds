@@ -7,47 +7,51 @@ output "this_db_instance_id" {
 }
 output "this_db_instance_engine" {
   description = "Rds instance engine."
-  value       = alicloud_db_instance.this.*.engine
+  value       = concat(alicloud_db_instance.this.*.engine, [""])[0]
 }
 output "this_db_instance_engine_version" {
   description = "Rds instance engine version."
-  value       = alicloud_db_instance.this.*.engine_version
+  value       = concat(alicloud_db_instance.this.*.engine_version, [""])[0]
 }
 output "this_db_instance_type" {
   description = "Rds instance type."
-  value       = alicloud_db_instance.this.*.instance_type
+  value       = concat(alicloud_db_instance.this.*.instance_type, [""])[0]
 }
 output "this_db_instance_storage" {
   description = "Rds instance storage."
-  value       = alicloud_db_instance.this.*.instance_storage
+  value       = concat(alicloud_db_instance.this.*.instance_storage, [""])[0]
 }
 output "this_db_instance_charge_type" {
   description = "Rds instance charge type."
-  value       = alicloud_db_instance.this.*.instance_charge_type
+  value       = concat(alicloud_db_instance.this.*.instance_charge_type, [""])[0]
 }
 output "this_db_instance_name" {
   description = "Rds instance name."
-  value       = alicloud_db_instance.this.*.instance_name
+  value       = concat(alicloud_db_instance.this.*.instance_name, [""])[0]
 }
 output "this_db_instance_period" {
   description = "Rds instance charge period when Prepaid."
-  value       = alicloud_db_instance.this.*.period
+  value       = concat(alicloud_db_instance.this.*.period, [""])[0]
 }
 output "this_db_instance_security_ips" {
   description = "Rds instance security ip list."
-  value       = alicloud_db_instance.this.*.security_ips
+  value       = concat(alicloud_db_instance.this.*.security_ips, [""])[0]
 }
 output "this_db_instance_zone_id" {
   description = "The zone id in which the Rds instance."
-  value       = alicloud_db_instance.this.*.zone_id
+  value       = concat(alicloud_db_instance.this.*.zone_id, [""])[0]
 }
 output "this_db_instance_vswitch_id" {
   description = "The vswitch id in which the Rds instance."
-  value       = alicloud_db_instance.this.*.security_ips
+  value       = concat(alicloud_db_instance.this.*.vswitch_id, [""])[0]
 }
 output "this_db_instance_security_group_ids" {
   description = "The security group ids in which the Rds instance."
-  value       = spilt(",", alicloud_db_instance.this.*.security_group_id)
+  value       = alicloud_db_instance.this.*.security_group_id
+}
+output "this_db_instance_tags" {
+  description = "Rds instance tags"
+  value = alicloud_db_instance.this.*.tags
 }
 
 #################
@@ -55,15 +59,15 @@ output "this_db_instance_security_group_ids" {
 #################
 output "this_db_instance_connection_string" {
   description = "Rds instance public connection string"
-  value       = alicloud_db_instance.this.*.connection_string
+  value       = concat(alicloud_db_instance.this.*.connection_string, [""])[0]
 }
 output "this_db_instance_port" {
   description = "Rds instance public connection string"
-  value       = alicloud_db_instance.this.*.port
+  value       = concat(alicloud_db_instance.this.*.port, [""])[0]
 }
 output "this_db_instance_connection_ip_address" {
   description = "Rds instance public connection string's ip address"
-  value       = alicloud_db_connection.db_connection.*.ip_address
+  value       = concat(alicloud_db_connection.db_connection.*.ip_address, [""])[0]
 }
 
 #################
