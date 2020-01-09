@@ -6,7 +6,7 @@ Configuration in this directory creates set of RDS resources including DB instan
 ```hcl
 module "rds_db_database" {
   source  = "terraform-alicloud-modules/rds/alicloud//mysql-5.5-enterprise"
-  version = "2.0.0"
+  version = "~> 2.0"
   # insert the 2 required variables here
 }
 ```

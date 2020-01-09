@@ -4,7 +4,7 @@
 ```hcl
 module "rds_db_database" {
   source  = "terraform-alicloud-modules/rds/alicloud//ppas-9.3-high-availability"
-  version = "2.0.0"
+  version = "~> 2.0"
   # insert the 2 required variables here
 }
 ```
