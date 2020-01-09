@@ -1,4 +1,10 @@
 ## 2.1.0 (Unreleased)
+## 2.0.1 (January 8, 2020)
+
+IMPROVEMENTS:
+
+- modify modules version in readme [GH-16](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/pull/16)
+
 ## 2.0.0 (January 8, 2020)
 
 - **Added:** `examples` [GH-9](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/pull/9)
