@@ -1,8 +1,12 @@
 variable "region" {
   default = "cn-beijing"
 }
+variable "profile" {
+  default = "default"
+}
 provider "alicloud" {
-  region = var.region
+  region  = var.region
+  profile = var.profile
 }
 data "alicloud_vpcs" "default" {
   is_default = true
@@ -11,6 +15,7 @@ data "alicloud_vpcs" "default" {
 module "security_group" {
   source  = "alibaba/security-group/alicloud"
   region  = var.region
+  profile = var.profile
   vpc_id  = data.alicloud_vpcs.default.ids.0
   version = "~> 2.0"
 }
@@ -18,6 +23,7 @@ module "postgre_sql" {
   source            = "../../modules/postgre_sql-9.4-high-availability"
   connection_prefix = "developmentabc"
   region            = var.region
+  profile           = var.profile
   #################
   # Rds Instance
   #################

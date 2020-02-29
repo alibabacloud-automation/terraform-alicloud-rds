@@ -22,10 +22,12 @@ This module requires Terraform 0.12.
 ```hcl
 
 module "mysql" {
-  source            = "terraform-alicloud-modules/rds/alicloud"
+  source  = "terraform-alicloud-modules/rds/alicloud"
+  profile = "Your-Profile-Name"
+  region  = "cn-beijing"
+  
   engine            = "MySQL"
   engine_version    = "8.0"
-  region            = "cn-hangzhou"
   connection_prefix = "developmentabc"
   vswitch_id        = "vsw-bp1tili2u5kpgdk84osjk"
   instance_storage  = 20

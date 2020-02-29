@@ -18,16 +18,17 @@ resource "alicloud_db_instance" "this" {
   security_ips         = var.security_ips
   vswitch_id           = var.vswitch_id
   tags                 = var.tags
-  security_group_id    = length(local.security_group_ids[0]) > 0 ? join(",", local.security_group_ids) : ""
+  security_group_ids   = local.security_group_ids
 }
+
 resource "alicloud_db_backup_policy" "this" {
-  count                = local.create_more_resources ? 1 : 0
-  instance_id          = local.this_instance_id
-  retention_period     = local.retention_period
-  backup_time          = local.backup_time
-  backup_period        = local.backup_period
-  log_retention_period = local.log_retention_period
-  enable_backup_log    = var.enable_backup_log
+  count                       = local.create_more_resources ? 1 : 0
+  instance_id                 = local.this_instance_id
+  backup_retention_period     = local.retention_period
+  preferred_backup_time       = local.backup_time
+  preferred_backup_period     = local.backup_period
+  log_backup_retention_period = local.log_retention_period
+  enable_backup_log           = var.enable_backup_log
 }
 
 

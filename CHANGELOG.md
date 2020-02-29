@@ -1,4 +1,9 @@
 ## 2.1.0 (Unreleased)
+
+BUG FIXES:
+
+- fix security group ids error [GH-17](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/pull/17)
+
 ## 2.0.1 (January 8, 2020)
 
 IMPROVEMENTS:
