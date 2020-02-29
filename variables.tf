@@ -115,7 +115,7 @@ variable "backup_retention_period" {
 variable "enable_backup_log" {
   description = "Whether to backup instance log. Default to true."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "log_backup_retention_period" {
