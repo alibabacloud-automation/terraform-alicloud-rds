@@ -7,18 +7,20 @@ provider "alicloud" {
   configuration_source    = "terraform-alicloud-modules/rds"
 }
 resource "alicloud_db_instance" "this" {
-  count                = var.existing_instance_id != "" ? 0 : var.create_instance ? 1 : 0
-  engine               = var.engine
-  engine_version       = var.engine_version
-  instance_type        = var.instance_type
-  instance_storage     = var.instance_storage
-  instance_charge_type = var.instance_charge_type
-  instance_name        = var.instance_name
-  period               = var.period
-  security_ips         = var.security_ips
-  vswitch_id           = var.vswitch_id
-  tags                 = var.tags
-  security_group_ids   = local.security_group_ids
+  count                      = var.existing_instance_id != "" ? 0 : var.create_instance ? 1 : 0
+  engine                     = var.engine
+  engine_version             = var.engine_version
+  instance_type              = var.instance_type
+  instance_storage           = var.instance_storage
+  instance_charge_type       = var.instance_charge_type
+  instance_name              = var.instance_name
+  period                     = var.period
+  security_ips               = var.security_ips
+  vswitch_id                 = var.vswitch_id
+  tags                       = var.tags
+  security_group_ids         = local.security_group_ids
+  sql_collector_status       = var.sql_collector_status
+  sql_collector_config_value = var.sql_collector_config_value
 }
 
 resource "alicloud_db_backup_policy" "this" {

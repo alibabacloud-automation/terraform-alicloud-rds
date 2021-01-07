@@ -1,4 +1,10 @@
-## 2.2.0 (Unreleased)
+## 2.3.0 (Unreleased)
+## 2.2.0 (January 7, 2021)
+
+IMPROVEMENTS:
+
+- support sql collector parameters [GH-21](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/pull/21)
+
 ## 2.1.0 (February 29, 2020)
 
 BUG FIXES:
