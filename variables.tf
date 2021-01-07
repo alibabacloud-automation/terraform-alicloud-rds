@@ -90,6 +90,16 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+variable "sql_collector_status" {
+  description = "The sql collector status of the instance. Valid values are `Enabled`, `Disabled`, Default to `Disabled`."
+  type        = string
+  default     = "Disabled"
+}
+variable "sql_collector_config_value" {
+  description = "The sql collector keep time of the instance. Valid values are `30`, `180`, `365`, `1095`, `1825`, Default to `30`."
+  type        = number
+  default     = 30
+}
 
 #################
 # Rds Backup policy
