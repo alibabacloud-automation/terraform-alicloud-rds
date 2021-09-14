@@ -58,6 +58,13 @@ variable "period" {
   type        = number
   default     = 1
 }
+
+variable "instance_storage_type" {
+  description = "The storage type of DB instance"
+  type        = string
+  default     = "local_ssd"
+}
+
 variable "instance_storage" {
   description = "The storage capacity of the instance. Unit: GB. The storage capacity increases at increments of 5 GB. For more information, see [Instance Types](https://www.alibabacloud.com/help/doc-detail/26312.htm)."
   type        = number

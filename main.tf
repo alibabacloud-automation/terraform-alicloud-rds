@@ -11,6 +11,7 @@ resource "alicloud_db_instance" "this" {
   engine                     = var.engine
   engine_version             = var.engine_version
   instance_type              = var.instance_type
+  db_instance_storage_type   = var.instance_storage_type
   instance_storage           = var.instance_storage
   instance_charge_type       = var.instance_charge_type
   instance_name              = var.instance_name
