@@ -90,7 +90,7 @@ If you have not set them yet, please install [aliyun-cli](https://github.com/ali
 
 Authors
 -------
-Created and maintained by He Guimin(@xiaozhu36, heguimin36@163.com)
+Created and maintained by Alibaba Cloud Terraform Team(terraform@alibabacloud.com)
 
 License
 ----
