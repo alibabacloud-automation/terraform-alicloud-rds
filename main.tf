@@ -36,9 +36,8 @@ resource "alicloud_db_backup_policy" "this" {
 
 
 resource "alicloud_db_connection" "db_connection" {
-  count             = local.create_more_resources && var.allocate_public_connection && var.connection_prefix != "" ? 1 : 0
+  count             = var.allocate_public_connection ? 1 : 0
   instance_id       = local.this_instance_id
-  connection_prefix = var.connection_prefix
   port              = var.port
 }
 

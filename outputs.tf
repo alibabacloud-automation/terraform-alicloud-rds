@@ -70,6 +70,10 @@ output "this_db_instance_connection_ip_address" {
   value       = concat(alicloud_db_connection.db_connection.*.ip_address, [""])[0]
 }
 
+output "db_public_connection_string" {
+  value = concat(alicloud_db_connection.db_connection.*.connection_string, [""])[0]
+}
+
 #################
 # Rds database
 #################
