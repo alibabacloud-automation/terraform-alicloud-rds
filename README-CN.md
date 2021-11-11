@@ -13,7 +13,10 @@ terraform-alicloud-rds
 
 ## Terraform 版本
 
-本模板要求使用版本 Terraform 0.12。
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.0 |
+| <a name="requirement_alicloud"></a> [alicloud](#requirement\_alicloud) | >= 1.56.0
 
 ## 用法
 
@@ -81,8 +84,45 @@ module "mysql" {
 * [SQL Server 实例完整创建示例创建示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/tree/master/examples/sql_server)
 
 ## 注意事项
+本Module从版本v1.9.0开始已经移除掉如下的 provider 的显示设置：
+```hcl
+provider "alicloud" {
+  profile                 = var.profile != "" ? var.profile : null
+  region                  = var.region != "" ? var.region : null
+  skip_region_validation  = var.skip_region_validation
+}
+```
 
-* 本 Module 使用的 AccessKey 和 SecretKey 可以直接从 `profile` 和 `shared_credentials_file` 中获取。如果未设置，可通过下载安装 [aliyun-cli](https://github.com/aliyun/aliyun-cli#installation) 后进行配置.
+如果你依然想在Module中使用这个 provider 配置，你可以在调用Module的时候，指定一个特定的版本，比如 1.8.0:
+
+```hcl
+module "rds" {
+  source  = "alibaba/rds/alicloud"
+  version     = "1.8.0"
+  region      = "cn-hangzhou"
+  profile     = "Your-Profile-Name"
+  create      = true
+  vpc_name    = "my-env-rds"
+  // ...
+}
+```
+如果你想对正在使用中的Module升级到 1.9.0 或者更高的版本，那么你可以在模板中显示定义一个系统过Region的provider：
+```hcl
+provider "alicloud" {
+  region  = "cn-hangzhou"
+  profile = "Your-Profile-Name"
+}
+module "rds" {
+  source  = "alibaba/rds/alicloud"
+  create            = true
+  vpc_name          = "my-env-rds"
+  // ...
+}
+```
+
+定义完provider之后，运行命令 `terraform init` 和 `terraform apply` 来让这个provider生效即可。
+
+更多provider的使用细节，请移步[How to use provider in the module](https://www.terraform.io/docs/language/modules/develop/providers.html#passing-providers-explicitly)
 
 作者
 -------

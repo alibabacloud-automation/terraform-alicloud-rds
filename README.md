@@ -15,7 +15,10 @@ These types of resources are supported:
 
 ## Terraform versions
 
-This module requires Terraform 0.12.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.0 |
+| <a name="requirement_alicloud"></a> [alicloud](#requirement\_alicloud) | >= 1.56.0
 
 ## Usage
 
@@ -84,9 +87,49 @@ module "mysql" {
 * [SQL Server example](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/tree/master/examples/sql_server)
 
 ## Notes
+From the version v1.9.0, the module has removed the following `provider` setting:
 
-* This module using AccessKey and SecretKey are from `profile` and `shared_credentials_file`.
-If you have not set them yet, please install [aliyun-cli](https://github.com/aliyun/aliyun-cli#installation) and configure it.
+```hcl
+provider "alicloud" {
+  profile                 = var.profile != "" ? var.profile : null
+  region                  = var.region != "" ? var.region : null
+  skip_region_validation  = var.skip_region_validation
+}
+```
+
+If you still want to use the `provider` setting to apply this module, you can specify a supported version, like 1.8.0:
+
+```hcl
+module "rds" {
+  source  = "alibaba/rds/alicloud"
+  version     = "1.8.0"
+  region      = "cn-hangzhou"
+  profile     = "Your-Profile-Name"
+  
+  create            = true
+  vpc_name          = "my-env-rds"
+  // ...
+}
+```
+
+If you want to upgrade the module to 1.9.0 or higher in-place, you can define a provider which same region with
+previous region:
+
+```hcl
+provider "alicloud" {
+   region  = "cn-hangzhou"
+   profile = "Your-Profile-Name"
+}
+module "rds" {
+  source  = "alibaba/rds/alicloud"
+  create            = true
+  vpc_name          = "my-env-rds"
+  // ...
+}
+```
+
+and then run `terraform init` and `terraform apply` to make the defined provider effect to the existing module state.
+More details see [How to use provider in the module](https://www.terraform.io/docs/language/modules/develop/providers.html#passing-providers-explicitly)
 
 Authors
 -------
