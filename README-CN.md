@@ -84,7 +84,7 @@ module "mysql" {
 * [SQL Server 实例完整创建示例创建示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/tree/master/examples/sql_server)
 
 ## 注意事项
-本Module从版本v1.9.0开始已经移除掉如下的 provider 的显示设置：
+本Module从版本v2.4.0开始已经移除掉如下的 provider 的显示设置：
 ```hcl
 provider "alicloud" {
   profile                 = var.profile != "" ? var.profile : null
@@ -93,30 +93,46 @@ provider "alicloud" {
 }
 ```
 
-如果你依然想在Module中使用这个 provider 配置，你可以在调用Module的时候，指定一个特定的版本，比如 1.8.0:
+如果你依然想在Module中使用这个 provider 配置，你可以在调用Module的时候，指定一个特定的版本，比如 2.3.0:
 
 ```hcl
 module "rds" {
-  source  = "alibaba/rds/alicloud"
-  version     = "1.8.0"
+  source  = "terraform-alicloud-modules/rds/alicloud"
+  version     = "2.3.0"
   region      = "cn-hangzhou"
   profile     = "Your-Profile-Name"
-  create      = true
-  vpc_name    = "my-env-rds"
-  // ...
+
+  engine            = "MySQL"
+  engine_version    = "8.0"
 }
 ```
-如果你想对正在使用中的Module升级到 1.9.0 或者更高的版本，那么你可以在模板中显示定义一个系统过Region的provider：
+如果你想对正在使用中的Module升级到 2.4.0 或者更高的版本，那么你可以在模板中显示定义一个相同Region的provider：
 ```hcl
 provider "alicloud" {
   region  = "cn-hangzhou"
   profile = "Your-Profile-Name"
 }
 module "rds" {
-  source  = "alibaba/rds/alicloud"
-  create            = true
-  vpc_name          = "my-env-rds"
-  // ...
+  source  = "terraform-alicloud-modules/rds/alicloud"
+  engine            = "MySQL"
+  engine_version    = "8.0"
+}
+```
+或者，如果你是多Region部署，你可以利用 `alias` 定义多个 provider，并在Module中显示指定这个provider：
+
+```hcl
+provider "alicloud" {
+  region  = "cn-hangzhou"
+  profile = "Your-Profile-Name"
+  alias   = "hz"
+}
+module "rds" {
+  source  = "terraform-alicloud-modules/rds/alicloud"
+  providers = {
+    alicloud = alicloud.hz
+  }
+  engine            = "MySQL"
+  engine_version    = "8.0"
 }
 ```
 

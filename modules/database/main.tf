@@ -1,12 +1,3 @@
-provider "alicloud" {
-  version                 = ">=1.64.0"
-  profile                 = var.profile != "" ? var.profile : null
-  shared_credentials_file = var.shared_credentials_file != "" ? var.shared_credentials_file : null
-  region                  = var.region != "" ? var.region : null
-  skip_region_validation  = var.skip_region_validation
-  configuration_source    = "terraform-alicloud-modules/rds"
-}
-
 resource "alicloud_db_database" "this" {
   count         = var.create_database ? length(var.databases) : 0
   instance_id   = var.db_instance_id

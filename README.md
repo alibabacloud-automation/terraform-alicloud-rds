@@ -87,7 +87,7 @@ module "mysql" {
 * [SQL Server example](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/tree/master/examples/sql_server)
 
 ## Notes
-From the version v1.9.0, the module has removed the following `provider` setting:
+From the version v2.4.0, the module has removed the following `provider` setting:
 
 ```hcl
 provider "alicloud" {
@@ -97,22 +97,21 @@ provider "alicloud" {
 }
 ```
 
-If you still want to use the `provider` setting to apply this module, you can specify a supported version, like 1.8.0:
+If you still want to use the `provider` setting to apply this module, you can specify a supported version, like 2.3.0:
 
 ```hcl
 module "rds" {
-  source  = "alibaba/rds/alicloud"
-  version     = "1.8.0"
+  source  = "terraform-alicloud-modules/rds/alicloud"
+  version     = "2.3.0"
   region      = "cn-hangzhou"
   profile     = "Your-Profile-Name"
-  
-  create            = true
-  vpc_name          = "my-env-rds"
-  // ...
+
+  engine            = "MySQL"
+  engine_version    = "8.0"
 }
 ```
 
-If you want to upgrade the module to 1.9.0 or higher in-place, you can define a provider which same region with
+If you want to upgrade the module to 2.4.0 or higher in-place, you can define a provider which same region with
 previous region:
 
 ```hcl
@@ -121,10 +120,26 @@ provider "alicloud" {
    profile = "Your-Profile-Name"
 }
 module "rds" {
-  source  = "alibaba/rds/alicloud"
-  create            = true
-  vpc_name          = "my-env-rds"
-  // ...
+  source  = "terraform-alicloud-modules/rds/alicloud"
+  engine            = "MySQL"
+  engine_version    = "8.0"
+}
+```
+or specify an alias provider with a defined region to the module using `providers`:
+
+```hcl
+provider "alicloud" {
+  region  = "cn-hangzhou"
+  profile = "Your-Profile-Name"
+  alias   = "hz"
+}
+module "rds" {
+  source  = "terraform-alicloud-modules/rds/alicloud"
+  providers = {
+    alicloud = alicloud.hz
+  }
+  engine            = "MySQL"
+  engine_version    = "8.0"
 }
 ```
 
