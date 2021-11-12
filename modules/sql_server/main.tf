@@ -1,11 +1,3 @@
-provider "alicloud" {
-  version                 = ">=1.64.0"
-  profile                 = var.profile != "" ? var.profile : null
-  shared_credentials_file = var.shared_credentials_file != "" ? var.shared_credentials_file : null
-  region                  = var.region != "" ? var.region : null
-  skip_region_validation  = var.skip_region_validation
-  configuration_source    = "terraform-alicloud-modules/rds"
-}
 locals {
   engine         = "SQLServer"
   engine_version = "2012_std_ha"
