@@ -26,8 +26,6 @@ These types of resources are supported:
 
 module "mysql" {
   source  = "terraform-alicloud-modules/rds/alicloud"
-  profile = "Your-Profile-Name"
-  region  = "cn-beijing"
   
   engine            = "MySQL"
   engine_version    = "8.0"
