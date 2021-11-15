@@ -87,10 +87,13 @@ module "mysql" {
 本Module从版本v2.4.0开始已经移除掉如下的 provider 的显示设置：
 ```hcl
 provider "alicloud" {
-  profile                 = var.profile != "" ? var.profile : null
-  region                  = var.region != "" ? var.region : null
-  skip_region_validation  = var.skip_region_validation
-}
+  version = ">=1.64.0"
+  profile = var.profile != "" ? var.profile : null
+  shared_credentials_file = var.shared_credentials_file != "" ? var.shared_credentials_file : null
+  region = var.region != "" ? var.region : null
+  skip_region_validation = var.skip_region_validation
+  configuration_source = "terraform-alicloud-modules/rds"
+} 
 ```
 
 如果你依然想在Module中使用这个 provider 配置，你可以在调用Module的时候，指定一个特定的版本，比如 2.3.0:
