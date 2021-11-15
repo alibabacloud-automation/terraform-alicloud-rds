@@ -91,10 +91,13 @@ From the version v2.4.0, the module has removed the following `provider` setting
 
 ```hcl
 provider "alicloud" {
-  profile                 = var.profile != "" ? var.profile : null
-  region                  = var.region != "" ? var.region : null
-  skip_region_validation  = var.skip_region_validation
-}
+  version = ">=1.64.0"
+  profile = var.profile != "" ? var.profile : null
+  shared_credentials_file = var.shared_credentials_file != "" ? var.shared_credentials_file : null
+  region = var.region != "" ? var.region : null
+  skip_region_validation = var.skip_region_validation
+  configuration_source = "terraform-alicloud-modules/rds"
+} 
 ```
 
 If you still want to use the `provider` setting to apply this module, you can specify a supported version, like 2.3.0:
