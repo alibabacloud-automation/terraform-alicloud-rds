@@ -1,4 +1,10 @@
-## 2.4.0 (Unreleased)
+## 2.5.0 (Unreleased)
+## 2.4.0 (November 15, 2021)
+
+IMPROVEMENTS:
+
+- Removes the provider setting and improves the Readme [GH-27](https://github.com/terraform-alicloud-modules/terraform-alicloud-rds/pull/27)
+
 ## 2.3.0 (October 15, 2021)
 
 IMPROVEMENTS:
