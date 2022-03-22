@@ -3,15 +3,19 @@
 #################
 variable "region" {
   description = "(Deprecated from version 2.4.0)The region used to launch this module resources."
+  type        = string
   default     = ""
 }
 
 variable "profile" {
   description = "(Deprecated from version 2.4.0)The profile name as set in the shared credentials file. If not set, it will be sourced from the ALICLOUD_PROFILE environment variable."
+  type        = string
   default     = ""
 }
+
 variable "shared_credentials_file" {
   description = "(Deprecated from version 2.4.0)This is the path to the shared credentials file. If this is not set and a profile is specified, $HOME/.aliyun/config.json will be used."
+  type        = string
   default     = ""
 }
 
@@ -24,43 +28,38 @@ variable "skip_region_validation" {
 #################
 # Rds Instance
 #################
-variable "existing_instance_id" {
-  description = "The Id of an existing RDS instance. If set, the `create_instance` will be ignored."
-  default     = ""
-}
-
 variable "create_instance" {
-  description = "Whether to create security group. If false, you can use a existing RDS instance by setting `existing_instance_id`."
+  description = "Whether to create RDS. If false, you can use a existing RDS instance by setting `existing_instance_id`."
   type        = bool
   default     = true
 }
 
 variable "engine" {
   description = "RDS Database type. Value options: MySQL, SQLServer, PostgreSQL, and PPAS"
-  default     = ""
+  type        = string
+  default     = "MySQL"
 }
 
 variable "engine_version" {
   description = "RDS Database version. Value options can refer to the latest docs [CreateDBInstance](https://www.alibabacloud.com/help/doc-detail/26228.htm) `EngineVersion`"
+  type        = string
   default     = ""
 }
 
 variable "instance_name" {
   description = "The name of DB instance. A random name prefixed with 'terraform-rds-' will be set if it is empty."
+  type        = string
   default     = ""
 }
-variable "instance_charge_type" {
-  description = "The instance charge type. Valid values: Prepaid and Postpaid. Default to Postpaid."
-  default     = "Postpaid"
-}
-variable "period" {
-  description = "The duration that you will buy DB instance (in month). It is valid when instance_charge_type is PrePaid. Valid values: [1~9], 12, 24, 36. Default to 1"
-  type        = number
-  default     = 1
+
+variable "instance_type" {
+  description = "DB Instance type, for example: mysql.n1.micro.1. full list is : https://www.alibabacloud.com/help/zh/doc-detail/26312.htm."
+  type        = string
+  default     = ""
 }
 
 variable "instance_storage_type" {
-  description = "The storage type of DB instance"
+  description = "The storage type of DB instance."
   type        = string
   default     = "local_ssd"
 }
@@ -71,8 +70,27 @@ variable "instance_storage" {
   default     = 20
 }
 
-variable "instance_type" {
-  description = "DB Instance type, for example: mysql.n1.micro.1. full list is : https://www.alibabacloud.com/help/zh/doc-detail/26312.htm"
+variable "instance_charge_type" {
+  description = "The instance charge type. Valid values: Prepaid and Postpaid. Default to Postpaid."
+  type        = string
+  default     = "Postpaid"
+}
+
+variable "period" {
+  description = "The duration that you will buy DB instance (in month). It is valid when instance_charge_type is PrePaid. Valid values: [1~9], 12, 24, 36. Default to 1"
+  type        = number
+  default     = 1
+}
+
+variable "security_ips" {
+  description = " List of IP addresses allowed to access all databases of an instance. The list contains up to 1,000 IP addresses, separated by commas. Supported formats include 0.0.0.0/0, 10.23.12.24 (IP), and 10.23.12.24/24 (Classless Inter-Domain Routing (CIDR) mode. /24 represents the length of the prefix in an IP address. The range of the prefix length is [1,32])."
+  type        = list(string)
+  default     = []
+}
+
+variable "vswitch_id" {
+  description = "The virtual switch ID to launch DB instances in one VPC."
+  type        = string
   default     = ""
 }
 
@@ -82,45 +100,31 @@ variable "security_group_ids" {
   default     = []
 }
 
-variable "vswitch_id" {
-  description = "The virtual switch ID to launch DB instances in one VPC."
-  default     = ""
-}
-
-variable "security_ips" {
-  description = " List of IP addresses allowed to access all databases of an instance. The list contains up to 1,000 IP addresses, separated by commas. Supported formats include 0.0.0.0/0, 10.23.12.24 (IP), and 10.23.12.24/24 (Classless Inter-Domain Routing (CIDR) mode. /24 represents the length of the prefix in an IP address. The range of the prefix length is [1,32])."
-  type        = list(string)
-  default     = []
-}
-variable "tags" {
-  description = "A mapping of tags to assign to the rds."
-  type        = map(string)
-  default     = {}
-}
 variable "sql_collector_status" {
   description = "The sql collector status of the instance. Valid values are `Enabled`, `Disabled`, Default to `Disabled`."
   type        = string
   default     = "Disabled"
 }
+
 variable "sql_collector_config_value" {
   description = "The sql collector keep time of the instance. Valid values are `30`, `180`, `365`, `1095`, `1825`, Default to `30`."
   type        = number
   default     = 30
 }
 
+variable "tags" {
+  description = "A mapping of tags to assign to the rds."
+  type        = map(string)
+  default     = {}
+}
+
 #################
 # Rds Backup policy
 #################
-
-variable "preferred_backup_period" {
-  description = "DB Instance backup period."
-  type        = list(string)
-  default     = []
-}
-
-variable "preferred_backup_time" {
-  description = " DB instance backup time, in the format of HH:mmZ- HH:mmZ. "
-  default     = "02:00Z-03:00Z"
+variable "existing_instance_id" {
+  description = "The Id of an existing RDS instance. If set, the `create_instance` will be ignored."
+  type        = string
+  default     = ""
 }
 
 variable "backup_retention_period" {
@@ -129,16 +133,28 @@ variable "backup_retention_period" {
   default     = 7
 }
 
-variable "enable_backup_log" {
-  description = "Whether to backup instance log. Default to true."
-  type        = bool
-  default     = true
-}
-
 variable "log_backup_retention_period" {
   description = "Instance log backup retention days. Valid values: [7-730]. Default to 7. It can be larger than 'retention_period'."
   type        = number
   default     = 7
+}
+
+variable "preferred_backup_time" {
+  description = " DB instance backup time, in the format of HH:mmZ- HH:mmZ. "
+  type        = string
+  default     = "02:00Z-03:00Z"
+}
+
+variable "preferred_backup_period" {
+  description = "DB Instance backup period."
+  type        = list(string)
+  default     = []
+}
+
+variable "enable_backup_log" {
+  description = "Whether to backup instance log. Default to true."
+  type        = bool
+  default     = true
 }
 
 #################
@@ -149,6 +165,7 @@ variable "allocate_public_connection" {
   type        = bool
   default     = true
 }
+
 variable "connection_prefix" {
   description = "Prefix of an Internet connection string. A random name prefixed with 'tf-rds-' will be set if it is empty."
   type        = string
@@ -159,33 +176,6 @@ variable "port" {
   description = " Internet connection port. Valid value: [3001-3999]. Default to 3306."
   type        = number
   default     = 3306
-}
-
-#################
-# Rds Database account
-#################
-variable "create_account" {
-  description = "Whether to create a new account. If true, the `account_name` should not be empty."
-  type        = bool
-  default     = true
-}
-variable "account_name" {
-  description = "Name of a new database account. It should be set when create_account = true."
-  default     = ""
-}
-variable "password" {
-  description = "Operation database account password. It may consist of letters, digits, or underlines, with a length of 6 to 32 characters."
-  default     = ""
-}
-
-variable "type" {
-  description = "Privilege type of account. Normal: Common privilege. Super: High privilege.Default to Normal."
-  default     = "Normal"
-}
-
-variable "privilege" {
-  description = "The privilege of one account access database."
-  default     = "ReadOnly"
 }
 
 #################
@@ -204,21 +194,51 @@ variable "databases" {
 }
 
 #################
+# Rds Database account
+#################
+variable "create_account" {
+  description = "Whether to create a new account. If true, the `account_name` should not be empty."
+  type        = bool
+  default     = true
+}
+
+variable "account_name" {
+  description = "Name of a new database account. It should be set when create_account = true."
+  type        = string
+  default     = ""
+}
+
+variable "password" {
+  description = "Operation database account password. It may consist of letters, digits, or underlines, with a length of 6 to 32 characters."
+  type        = string
+  default     = ""
+}
+
+variable "type" {
+  description = "Privilege type of account. Normal: Common privilege. Super: High privilege.Default to Normal."
+  type        = string
+  default     = "Normal"
+}
+
+variable "privilege" {
+  description = "The privilege of one account access database."
+  type        = string
+  default     = "ReadOnly"
+}
+
+#################
 # Depreceted parameters
 #################
-variable "backup_time" {
-  description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `preferred_backup_time` instead."
-  default     = "02:00Z-03:00Z"
-}
-
-variable "db_name" {
-  description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `databases` instead."
+variable "instance_id" {
+  description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `existing_instance_id` instead."
+  type        = string
   default     = ""
 }
 
-variable "character_set" {
-  description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `databases` instead."
-  default     = ""
+variable "vpc_security_group_ids" {
+  description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `security_group_ids` instead."
+  type        = list(string)
+  default     = []
 }
 
 variable "retention_period" {
@@ -226,9 +246,17 @@ variable "retention_period" {
   type        = number
   default     = 7
 }
-variable "zone_id" {
-  description = "`(Deprecated)` It has been deprecated from version 2.0.0 ."
-  default     = ""
+
+variable "log_retention_period" {
+  description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `log_backup_retention_period` instead."
+  type        = number
+  default     = 7
+}
+
+variable "backup_time" {
+  description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `preferred_backup_time` instead."
+  type        = string
+  default     = "02:00Z-03:00Z"
 }
 
 variable "backup_period" {
@@ -237,26 +265,26 @@ variable "backup_period" {
   default     = []
 }
 
+variable "db_name" {
+  description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `databases` instead."
+  type        = string
+  default     = ""
+}
+
 variable "db_names" {
   description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `databases` instead."
   type        = list(string)
   default     = []
 }
 
-variable "instance_id" {
-  description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `existing_instance_id` instead."
+variable "character_set" {
+  description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `databases` instead."
+  type        = string
   default     = ""
 }
-variable "log_retention_period" {
-  description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `log_backup_retention_period` instead."
-  type        = number
-  default     = 7
+
+variable "zone_id" {
+  description = "`(Deprecated)` It has been deprecated from version 2.0.0 ."
+  type        = string
+  default     = ""
 }
-variable "vpc_security_group_ids" {
-  description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `security_group_ids` instead."
-  type        = list(string)
-  default     = []
-}
-
-
-
