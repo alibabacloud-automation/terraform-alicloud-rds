@@ -29,10 +29,6 @@ output "this_db_instance_name" {
   description = "Rds instance name."
   value       = module.postgre_sql.this_db_instance_name
 }
-output "this_db_instance_period" {
-  description = "Rds instance charge period when Prepaid."
-  value       = module.postgre_sql.this_db_instance_period
-}
 output "this_db_instance_security_ips" {
   description = "Rds instance security ip list."
   value       = module.postgre_sql.this_db_instance_security_ips

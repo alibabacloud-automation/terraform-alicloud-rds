@@ -1,32 +1,23 @@
-variable "region" {
-  default = "cn-hangzhou"
-}
-variable "profile" {
-  default = "default"
-}
 provider "alicloud" {
-  region  = var.region
-  profile = var.profile
+  region = var.region
 }
 data "alicloud_vpcs" "default" {
   is_default = true
 }
 module "security_group" {
-  source  = "alibaba/security-group/alicloud"
-  region  = var.region
-  profile = var.profile
-  vpc_id  = data.alicloud_vpcs.default.ids.0
+  source = "alibaba/security-group/alicloud"
+
+  vpc_id  = data.alicloud_vpcs.default.ids[0]
   version = "~> 2.0"
 }
 module "mysql" {
-  source  = "../../modules/mysql-8.0-high-availability"
-  region  = var.region
-  profile = var.profile
+  source = "../../modules/mysql-8.0-high-availability"
+
   #################
   # Rds Instance
   #################
   connection_prefix  = "developmentabc"
-  vswitch_id         = data.alicloud_vpcs.default.vpcs.0.vswitch_ids.0
+  vswitch_id         = data.alicloud_vpcs.default.vpcs[0].vswitch_ids[0]
   instance_name      = "myDBInstance"
   instance_type      = "rds.mysql.t1.small"
   security_group_ids = [module.security_group.this_security_group_id]
@@ -63,11 +54,12 @@ module "mysql" {
   # Rds Database account
   #################
   account_name = "account_name1"
-  password     = "1234abc"
+  password     = "Example1234"
   tags = {
     Env      = "Private"
     Location = "Secret"
   }
+
 }
 
 
