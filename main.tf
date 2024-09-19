@@ -13,7 +13,16 @@ resource "alicloud_db_instance" "this" {
   security_group_ids         = local.security_group_ids
   sql_collector_status       = var.sql_collector_status
   sql_collector_config_value = var.sql_collector_config_value
-  tags                       = var.tags
+  category                   = var.category
+
+  dynamic "serverless_config" {
+    for_each = var.serverless_config
+    content {
+      max_capacity = serverless_config.value.max_capacity
+      min_capacity = serverless_config.value.min_capacity
+    }
+  }
+  tags = var.tags
 }
 
 resource "alicloud_db_backup_policy" "this" {

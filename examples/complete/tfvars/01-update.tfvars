@@ -2,7 +2,6 @@
 # Rds Instance
 #################
 instance_name        = "update-tf-testacc-name"
-instance_storage     = 25
 period               = 2
 security_ips         = ["10.23.12.24"]
 sql_collector_status = "Disabled"

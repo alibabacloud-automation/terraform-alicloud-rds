@@ -1,6 +1,6 @@
 locals {
   # Get ID of RDS Instance
-  this_instance_id = var.existing_instance_id != "" ? var.existing_instance_id : var.instance_id != "" ? var.instance_id : concat(alicloud_db_instance.this.*.id, [""])[0]
+  this_instance_id = var.existing_instance_id != "" ? var.existing_instance_id : var.instance_id != "" ? var.instance_id : concat(alicloud_db_instance.this[*].id, [""])[0]
   # Whether to create database, account and other resources
   create_more_resources = var.create_instance
   create_database       = local.create_more_resources && var.create_database

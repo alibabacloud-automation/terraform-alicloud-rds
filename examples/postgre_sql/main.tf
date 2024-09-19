@@ -1,12 +1,5 @@
-variable "region" {
-  default = "cn-beijing"
-}
-variable "profile" {
-  default = "default"
-}
 provider "alicloud" {
-  region  = var.region
-  profile = var.profile
+  region = var.region
 }
 data "alicloud_vpcs" "default" {
   is_default = true
@@ -14,22 +7,50 @@ data "alicloud_vpcs" "default" {
 
 module "security_group" {
   source  = "alibaba/security-group/alicloud"
-  region  = var.region
-  profile = var.profile
-  vpc_id  = data.alicloud_vpcs.default.ids.0
   version = "~> 2.0"
+
+  vpc_id = data.alicloud_vpcs.default.ids[0]
+
 }
+
+data "alicloud_db_zones" "example" {
+  engine                   = "PostgreSQL"
+  engine_version           = "14.0"
+  instance_charge_type     = "Serverless"
+  category                 = "serverless_basic"
+  db_instance_storage_type = "cloud_essd"
+}
+
+data "alicloud_db_instance_classes" "example" {
+  zone_id                  = data.alicloud_db_zones.example.ids[1]
+  engine                   = "PostgreSQL"
+  engine_version           = "14.0"
+  category                 = "serverless_basic"
+  db_instance_storage_type = "cloud_essd"
+  instance_charge_type     = "Serverless"
+  commodity_code           = "rds_serverless_public_cn"
+}
+
 module "postgre_sql" {
-  source            = "../../modules/postgre_sql-9.4-high-availability"
+  source            = "../.."
   connection_prefix = "developmentabc"
-  region            = var.region
-  profile           = var.profile
+
   #################
   # Rds Instance
   #################
-  vswitch_id         = data.alicloud_vpcs.default.vpcs.0.vswitch_ids.0
-  instance_type      = "rds.pg.s1.small"
-  instance_name      = "myDBInstance"
+  vswitch_id            = data.alicloud_vpcs.default.vpcs[0].vswitch_ids[0]
+  engine                = "PostgreSQL"
+  engine_version        = "14.0"
+  instance_storage      = data.alicloud_db_instance_classes.example.instance_classes[0].storage_range.min
+  instance_type         = data.alicloud_db_instance_classes.example.instance_classes[0].instance_class
+  instance_charge_type  = "Serverless"
+  instance_storage_type = "cloud_essd"
+  instance_name         = "myDBInstance"
+  category              = "serverless_basic"
+  serverless_config = [{
+    max_capacity = 8
+    min_capacity = 2
+  }]
   security_group_ids = [module.security_group.this_security_group_id]
   security_ips = [
     "11.193.54.0/24",
@@ -47,5 +68,8 @@ module "postgre_sql" {
     Env      = "Private"
     Location = "Secret"
   }
+  allocate_public_connection = false
+  create_database            = false
+  create_account             = false
 }
 
