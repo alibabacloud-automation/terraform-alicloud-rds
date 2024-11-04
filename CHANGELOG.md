@@ -1,4 +1,8 @@
-## 2.5.0 (Unreleased)
+## 2.6.0 (Unreleased)
+## 2.5.0 (November 04, 2024)
+
+- module: support attibute category, serverless_config and deprecate offline submodules; examples: improve the examples [GH-34](https://github.com/alibabacloud-automation/terraform-alicloud-rds/pull/34)
+
 ## 2.4.0 (November 15, 2021)
 
 IMPROVEMENTS:
