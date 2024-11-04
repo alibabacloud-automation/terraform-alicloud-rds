@@ -7,15 +7,19 @@ data "alicloud_db_instance_classes" "default" {
 }
 
 module "vpc" {
-  source             = "alibaba/vpc/alicloud"
+  source  = "alibaba/vpc/alicloud"
+  version = "~>1.11.0"
+
   create             = true
   vpc_cidr           = "172.16.0.0/16"
   vswitch_cidrs      = ["172.16.0.0/21"]
-  availability_zones = [data.alicloud_db_zones.default.zones.0.id]
+  availability_zones = [data.alicloud_db_zones.default.zones[0].id]
 }
 
 module "security_group" {
-  source = "alibaba/security-group/alicloud"
+  source  = "alibaba/security-group/alicloud"
+  version = "~>2.4.0"
+
   vpc_id = module.vpc.this_vpc_id
 }
 
@@ -29,7 +33,7 @@ module "rds" {
   engine_version = "5.6"
 
   instance_name              = var.instance_name
-  instance_type              = data.alicloud_db_instance_classes.default.instance_classes.0.instance_class
+  instance_type              = data.alicloud_db_instance_classes.default.instance_classes[1].instance_class
   instance_storage_type      = "local_ssd"
   instance_storage           = var.instance_storage
   instance_charge_type       = var.instance_charge_type

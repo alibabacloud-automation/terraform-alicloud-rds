@@ -1,43 +1,26 @@
-#################
-# Provider
-#################
-variable "region" {
-  description = "(Deprecated from version 2.4.0)The region used to launch this module resources."
-  default     = ""
-}
-variable "profile" {
-  description = "(Deprecated from version 2.4.0)The profile name as set in the shared credentials file. If not set, it will be sourced from the ALICLOUD_PROFILE environment variable."
-  default     = ""
-}
-variable "shared_credentials_file" {
-  description = "(Deprecated from version 2.4.0)This is the path to the shared credentials file. If this is not set and a profile is specified, $HOME/.aliyun/config.json will be used."
-  default     = ""
-}
-variable "skip_region_validation" {
-  description = "(Deprecated from version 2.4.0)Skip static validation of region ID. Used by users of alternative AlibabaCloud-like APIs or users w/ access to regions that are not public (yet)."
-  type        = bool
-  default     = false
-}
 
 #################
 # Rds Instance
 #################
 variable "instance_name" {
   description = "The name of DB instance. A random name prefixed with 'terraform-rds-' will be set if it is empty."
+  type        = string
   default     = ""
 }
 variable "instance_charge_type" {
   description = "The instance charge type. Valid values: Prepaid and Postpaid. Default to Postpaid."
+  type        = string
   default     = "Postpaid"
 }
 variable "instance_storage" {
   description = "The storage capacity of the instance. Unit: GB. The storage capacity increases at increments of 5 GB. For more information, see [Instance Types](https://www.alibabacloud.com/help/doc-detail/26312.htm)."
   type        = number
-  default     = 20
+  default     = null
 }
 variable "instance_type" {
   description = "DB Instance type, for example: mysql.n1.micro.1. full list is : https://www.alibabacloud.com/help/zh/doc-detail/26312.htm"
-  default     = ""
+  type        = string
+  default     = null
 }
 variable "security_group_ids" {
   description = "List of VPC security group ids to associate with rds instance."
@@ -46,6 +29,7 @@ variable "security_group_ids" {
 }
 variable "vswitch_id" {
   description = "The virtual switch ID to launch DB instances in one VPC."
+  type        = string
   default     = ""
 }
 variable "security_ips" {
@@ -60,6 +44,7 @@ variable "tags" {
 }
 variable "instance_storage_type" {
   description = "The storage type of the instance"
+  type        = string
   default     = "local_ssd"
 }
 variable "sql_collector_status" {
@@ -73,7 +58,6 @@ variable "sql_collector_config_value" {
   default     = 30
 }
 
-
 #################
 # Rds Backup policy
 #################
@@ -84,6 +68,7 @@ variable "preferred_backup_period" {
 }
 variable "preferred_backup_time" {
   description = " DB instance backup time, in the format of HH:mmZ- HH:mmZ. "
+  type        = string
   default     = "02:00Z-03:00Z"
 }
 variable "backup_retention_period" {
@@ -131,18 +116,22 @@ variable "create_account" {
 }
 variable "account_name" {
   description = "Name of a new database account. It should be set when create_account = true."
+  type        = string
   default     = ""
 }
 variable "password" {
   description = "Operation database account password. It may consist of letters, digits, or underlines, with a length of 6 to 32 characters."
+  type        = string
   default     = ""
 }
 variable "type" {
   description = "Privilege type of account. Normal: Common privilege. Super: High privilege.Default to Normal."
+  type        = string
   default     = "Normal"
 }
 variable "privilege" {
   description = "The privilege of one account access database."
+  type        = string
   default     = "ReadOnly"
 }
 

@@ -36,11 +36,6 @@ output "this_db_instance_name" {
   value       = module.rds.this_db_instance_name
 }
 
-output "this_db_instance_period" {
-  description = "Rds instance charge period when Prepaid."
-  value       = module.rds.this_db_instance_period
-}
-
 output "this_db_instance_security_ips" {
   description = "Rds instance security ip list."
   value       = module.rds.this_db_instance_security_ips
