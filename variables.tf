@@ -1,29 +1,3 @@
-#################
-# Provider
-#################
-variable "region" {
-  description = "(Deprecated from version 2.4.0)The region used to launch this module resources."
-  type        = string
-  default     = ""
-}
-
-variable "profile" {
-  description = "(Deprecated from version 2.4.0)The profile name as set in the shared credentials file. If not set, it will be sourced from the ALICLOUD_PROFILE environment variable."
-  type        = string
-  default     = ""
-}
-
-variable "shared_credentials_file" {
-  description = "(Deprecated from version 2.4.0)This is the path to the shared credentials file. If this is not set and a profile is specified, $HOME/.aliyun/config.json will be used."
-  type        = string
-  default     = ""
-}
-
-variable "skip_region_validation" {
-  description = "(Deprecated from version 2.4.0)Skip static validation of region ID. Used by users of alternative AlibabaCloud-like APIs or users w/ access to regions that are not public (yet)."
-  type        = bool
-  default     = false
-}
 
 #################
 # Rds Instance
@@ -116,6 +90,24 @@ variable "tags" {
   description = "A mapping of tags to assign to the rds."
   type        = map(string)
   default     = {}
+}
+
+variable "category" {
+  description = "The category of the DB instance."
+  type        = string
+  default     = null
+
+}
+
+variable "serverless_config" {
+  description = "The serverless config of the instance."
+  type = list(object({
+    max_capacity = number
+    min_capacity = number
+    auto_pause   = optional(bool, null)
+    switch_force = optional(bool, null)
+  }))
+  default = []
 }
 
 #################
@@ -265,26 +257,3 @@ variable "backup_period" {
   default     = []
 }
 
-variable "db_name" {
-  description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `databases` instead."
-  type        = string
-  default     = ""
-}
-
-variable "db_names" {
-  description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `databases` instead."
-  type        = list(string)
-  default     = []
-}
-
-variable "character_set" {
-  description = "`(Deprecated)` It has been deprecated from version 2.0.0 and use `databases` instead."
-  type        = string
-  default     = ""
-}
-
-variable "zone_id" {
-  description = "`(Deprecated)` It has been deprecated from version 2.0.0 ."
-  type        = string
-  default     = ""
-}
