@@ -1,3 +1,5 @@
+## [2.5.1](https://github.com/alibabacloud-automation/terraform-alicloud-rds/compare/v2.5.0...v2.5.1) (2025-12-02)
+
 ## 2.6.0 (Unreleased)
 ## 2.5.0 (November 04, 2024)
 
