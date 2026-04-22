@@ -1,3 +1,14 @@
+## [3.0.0](https://github.com/alibabacloud-automation/terraform-alicloud-rds/compare/v2.5.1...v3.0.0) (2026-04-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* add provider version constraint for aliyun/alicloud
+
+### Features
+
+* add provider version constraint for aliyun/alicloud ([de09a02](https://github.com/alibabacloud-automation/terraform-alicloud-rds/commit/de09a02268d0d769c21be486e65d9b574233bd52))
+
 ## [2.5.1](https://github.com/alibabacloud-automation/terraform-alicloud-rds/compare/v2.5.0...v2.5.1) (2025-12-02)
 
 ## 2.6.0 (Unreleased)
