@@ -8,7 +8,7 @@ module "security_group" {
   source = "alibaba/security-group/alicloud"
 
   vpc_id  = data.alicloud_vpcs.default.ids[0]
-  version = "~> 2.0"
+  version = "3.0.0"
 }
 module "mysql" {
   source = "../../modules/mysql-8.0-high-availability"
