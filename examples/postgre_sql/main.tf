@@ -41,7 +41,7 @@ module "postgre_sql" {
   vswitch_id            = data.alicloud_vpcs.default.vpcs[0].vswitch_ids[0]
   engine                = "PostgreSQL"
   engine_version        = "14.0"
-  instance_storage      = data.alicloud_db_instance_classes.example.instance_classes[0].storage_range.min
+  instance_storage      = data.alicloud_db_instance_classes.example.instance_classes[0].storage_range[0].min
   instance_type         = data.alicloud_db_instance_classes.example.instance_classes[0].instance_class
   instance_charge_type  = "Serverless"
   instance_storage_type = "cloud_essd"
