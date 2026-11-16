@@ -1,6 +1,9 @@
 provider "alicloud" {
   region = var.region
 }
+resource "alicloud_rds_service_linked_role" "postgresql" {
+  service_name = "AliyunServiceRoleForRdsPgsqlOnEcs"
+}
 data "alicloud_vpcs" "default" {
   is_default = true
 }
@@ -71,5 +74,7 @@ module "postgre_sql" {
   allocate_public_connection = false
   create_database            = false
   create_account             = false
+
+  depends_on = [alicloud_rds_service_linked_role.postgresql]
 }
 

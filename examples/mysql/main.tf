@@ -4,6 +4,16 @@ provider "alicloud" {
 data "alicloud_vpcs" "default" {
   is_default = true
 }
+data "alicloud_vswitches" "default" {
+  ids = [data.alicloud_vpcs.default.vpcs[0].vswitch_ids[0]]
+}
+data "alicloud_db_instance_classes" "default" {
+  zone_id                  = data.alicloud_vswitches.default.vswitches[0].zone_id
+  engine                   = "MySQL"
+  engine_version           = "8.0"
+  category                 = "HighAvailability"
+  db_instance_storage_type = "cloud_essd"
+}
 module "security_group" {
   source = "alibaba/security-group/alicloud"
 
@@ -16,11 +26,13 @@ module "mysql" {
   #################
   # Rds Instance
   #################
-  connection_prefix  = "developmentabc"
-  vswitch_id         = data.alicloud_vpcs.default.vpcs[0].vswitch_ids[0]
-  instance_name      = "myDBInstance"
-  instance_type      = "rds.mysql.t1.small"
-  security_group_ids = [module.security_group.this_security_group_id]
+  connection_prefix     = "developmentabc"
+  vswitch_id            = data.alicloud_vpcs.default.vpcs[0].vswitch_ids[0]
+  instance_name         = "myDBInstance"
+  instance_type         = data.alicloud_db_instance_classes.default.instance_classes[0].instance_class
+  instance_storage      = data.alicloud_db_instance_classes.default.instance_classes[0].storage_range[0].min
+  instance_storage_type = "cloud_essd"
+  security_group_ids    = [module.security_group.this_security_group_id]
   security_ips = [
     "11.193.54.0/24",
     "101.37.74.0/24",

@@ -1,9 +1,18 @@
 data "alicloud_db_zones" "default" {
+  engine                   = "MySQL"
+  engine_version           = "8.0"
+  instance_charge_type     = "PostPaid"
+  category                 = "HighAvailability"
+  db_instance_storage_type = "cloud_essd"
 }
 
 data "alicloud_db_instance_classes" "default" {
-  engine         = "MySQL"
-  engine_version = "5.6"
+  zone_id                  = data.alicloud_db_zones.default.zones[0].id
+  engine                   = "MySQL"
+  engine_version           = "8.0"
+  instance_charge_type     = "PostPaid"
+  category                 = "HighAvailability"
+  db_instance_storage_type = "cloud_essd"
 }
 
 module "vpc" {
@@ -30,11 +39,11 @@ module "rds" {
   create_instance = true
 
   engine         = "MySQL"
-  engine_version = "5.6"
+  engine_version = "8.0"
 
   instance_name              = var.instance_name
-  instance_type              = data.alicloud_db_instance_classes.default.instance_classes[1].instance_class
-  instance_storage_type      = "local_ssd"
+  instance_type              = data.alicloud_db_instance_classes.default.instance_classes[0].instance_class
+  instance_storage_type      = "cloud_essd"
   instance_storage           = var.instance_storage
   instance_charge_type       = var.instance_charge_type
   period                     = var.period
