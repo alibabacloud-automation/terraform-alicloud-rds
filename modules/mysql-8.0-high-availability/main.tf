@@ -3,10 +3,16 @@ locals {
   engine_version = "8.0"
 }
 data "alicloud_db_instance_classes" "default" {
-  engine         = local.engine
-  engine_version = local.engine_version
-  category       = "HighAvailability"
-  storage_type   = var.instance_storage_type
+  zone_id                  = data.alicloud_vswitches.default.vswitches[0].zone_id
+  engine                   = local.engine
+  engine_version           = local.engine_version
+  instance_charge_type     = var.instance_charge_type == "Prepaid" ? "PrePaid" : "PostPaid"
+  category                 = "HighAvailability"
+  db_instance_storage_type = var.instance_storage_type
+}
+
+data "alicloud_vswitches" "default" {
+  ids = [var.vswitch_id]
 }
 module "mysql" {
   source = "../../"
