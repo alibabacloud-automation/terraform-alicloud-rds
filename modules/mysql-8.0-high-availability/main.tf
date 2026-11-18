@@ -30,7 +30,6 @@ module "mysql" {
   vswitch_id                 = var.vswitch_id
   security_ips               = var.security_ips
   tags                       = var.tags
-  category                   = "HighAvailability"
   sql_collector_status       = var.sql_collector_status
   sql_collector_config_value = var.sql_collector_config_value
   #################
