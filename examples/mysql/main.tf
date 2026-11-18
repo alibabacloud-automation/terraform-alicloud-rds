@@ -25,14 +25,6 @@ resource "alicloud_vswitch" "this" {
 locals {
   vswitch_id = length(data.alicloud_vswitches.default.ids) > 0 ? data.alicloud_vswitches.default.ids[0] : alicloud_vswitch.this[0].id
 }
-data "alicloud_db_instance_classes" "default" {
-  zone_id                  = data.alicloud_db_zones.default.zones[0].id
-  engine                   = "MySQL"
-  engine_version           = "8.0"
-  category                 = "HighAvailability"
-  instance_charge_type     = "PostPaid"
-  db_instance_storage_type = "cloud_essd"
-}
 module "security_group" {
   source = "alibaba/security-group/alicloud"
 
@@ -48,8 +40,8 @@ module "mysql" {
   connection_prefix     = "developmentabc"
   vswitch_id            = local.vswitch_id
   instance_name         = "myDBInstance"
-  instance_type         = data.alicloud_db_instance_classes.default.instance_classes[0].instance_class
-  instance_storage      = data.alicloud_db_instance_classes.default.instance_classes[0].storage_range[0].min
+  instance_type         = "mysql.x2.large.2c"
+  instance_storage      = 20
   instance_storage_type = "cloud_essd"
   security_group_ids    = [module.security_group.this_security_group_id]
   security_ips = [
