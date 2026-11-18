@@ -1,17 +1,36 @@
 provider "alicloud" {
   region = var.region
 }
+data "alicloud_db_zones" "default" {
+  engine                   = "MySQL"
+  engine_version           = "8.0"
+  instance_charge_type     = "PostPaid"
+  category                 = "HighAvailability"
+  db_instance_storage_type = "cloud_essd"
+}
 data "alicloud_vpcs" "default" {
   is_default = true
 }
 data "alicloud_vswitches" "default" {
-  ids = [data.alicloud_vpcs.default.vpcs[0].vswitch_ids[0]]
+  vpc_id  = data.alicloud_vpcs.default.ids[0]
+  zone_id = data.alicloud_db_zones.default.zones[0].id
+}
+resource "alicloud_vswitch" "this" {
+  count        = length(data.alicloud_vswitches.default.ids) > 0 ? 0 : 1
+  vswitch_name = "terraform-rds-mysql-example"
+  vpc_id       = data.alicloud_vpcs.default.ids[0]
+  zone_id      = data.alicloud_db_zones.default.zones[0].id
+  cidr_block   = cidrsubnet(data.alicloud_vpcs.default.vpcs[0].cidr_block, 8, 4)
+}
+locals {
+  vswitch_id = length(data.alicloud_vswitches.default.ids) > 0 ? data.alicloud_vswitches.default.ids[0] : alicloud_vswitch.this[0].id
 }
 data "alicloud_db_instance_classes" "default" {
-  zone_id                  = data.alicloud_vswitches.default.vswitches[0].zone_id
+  zone_id                  = data.alicloud_db_zones.default.zones[0].id
   engine                   = "MySQL"
   engine_version           = "8.0"
   category                 = "HighAvailability"
+  instance_charge_type     = "PostPaid"
   db_instance_storage_type = "cloud_essd"
 }
 module "security_group" {
@@ -27,7 +46,7 @@ module "mysql" {
   # Rds Instance
   #################
   connection_prefix     = "developmentabc"
-  vswitch_id            = data.alicloud_vpcs.default.vpcs[0].vswitch_ids[0]
+  vswitch_id            = local.vswitch_id
   instance_name         = "myDBInstance"
   instance_type         = data.alicloud_db_instance_classes.default.instance_classes[0].instance_class
   instance_storage      = data.alicloud_db_instance_classes.default.instance_classes[0].storage_range[0].min
