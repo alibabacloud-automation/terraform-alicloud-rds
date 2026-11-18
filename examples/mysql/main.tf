@@ -8,27 +8,20 @@ data "alicloud_db_zones" "default" {
   category                 = "HighAvailability"
   db_instance_storage_type = "cloud_essd"
 }
-data "alicloud_vpcs" "default" {
-  is_default = true
-}
-data "alicloud_vswitches" "default" {
-  vpc_id  = data.alicloud_vpcs.default.ids[0]
-  zone_id = data.alicloud_db_zones.default.zones[0].id
+resource "alicloud_vpc" "this" {
+  vpc_name   = "terraform-rds-mysql-example"
+  cidr_block = "172.16.0.0/16"
 }
 resource "alicloud_vswitch" "this" {
-  count        = length(data.alicloud_vswitches.default.ids) > 0 ? 0 : 1
   vswitch_name = "terraform-rds-mysql-example"
-  vpc_id       = data.alicloud_vpcs.default.ids[0]
+  vpc_id       = alicloud_vpc.this.id
   zone_id      = data.alicloud_db_zones.default.zones[0].id
-  cidr_block   = cidrsubnet(data.alicloud_vpcs.default.vpcs[0].cidr_block, 8, 4)
-}
-locals {
-  vswitch_id = length(data.alicloud_vswitches.default.ids) > 0 ? data.alicloud_vswitches.default.ids[0] : alicloud_vswitch.this[0].id
+  cidr_block   = "172.16.0.0/24"
 }
 module "security_group" {
   source = "alibaba/security-group/alicloud"
 
-  vpc_id  = data.alicloud_vpcs.default.ids[0]
+  vpc_id  = alicloud_vpc.this.id
   version = "3.0.0"
 }
 module "mysql" {
@@ -38,7 +31,7 @@ module "mysql" {
   # Rds Instance
   #################
   connection_prefix     = "developmentabc"
-  vswitch_id            = local.vswitch_id
+  vswitch_id            = alicloud_vswitch.this.id
   instance_name         = "myDBInstance"
   instance_type         = "mysql.x2.large.2c"
   instance_storage      = 20
