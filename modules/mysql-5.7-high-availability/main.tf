@@ -18,7 +18,7 @@ module "mysql" {
   engine                     = local.engine
   engine_version             = local.engine_version
   instance_type              = var.instance_type != "" ? var.instance_type : data.alicloud_db_instance_classes.default.instance_classes[0].instance_class
-  instance_storage           = var.instance_storage != "" ? var.instance_storage : data.alicloud_db_instance_classes.default.instance_classes[0].storage_range["min"]
+  instance_storage           = var.instance_storage != "" ? var.instance_storage : data.alicloud_db_instance_classes.default.instance_classes[0].storage_range[0].min
   instance_charge_type       = var.instance_charge_type
   instance_name              = var.instance_name
   security_group_ids         = var.security_group_ids

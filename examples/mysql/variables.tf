@@ -1,5 +1,5 @@
 variable "region" {
-  default     = "cn-hangzhou"
+  default     = "cn-beijing"
   description = "The region of the RDS instance."
   type        = string
 }
