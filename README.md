@@ -20,6 +20,10 @@ These types of resources are supported:
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.0 |
 | <a name="requirement_alicloud"></a> [alicloud](#requirement\_alicloud) | >= 2.0.0
 
+## Breaking change in 4.0.0
+
+Version 4.0.0 requires the Alicloud Provider `aliyun/alicloud >= 2.0.0`. Provider 1.x is no longer supported. Update the `required_providers` constraint and run `terraform init -upgrade` before upgrading.
+
 ## Usage
 
 <div style="display: block;margin-bottom: 40px;"><div class="oics-button" style="float: right;position: absolute;margin-bottom: 10px;">
