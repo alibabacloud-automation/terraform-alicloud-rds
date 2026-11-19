@@ -1,3 +1,19 @@
+## [4.0.0](https://github.com/alibabacloud-automation/terraform-alicloud-rds/compare/v3.0.0...v4.0.0) (2026-11-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* require Alicloud Provider 2.0.0
+
+### Features
+
+* require Alicloud Provider 2.0.0 ([4f0586f](https://github.com/alibabacloud-automation/terraform-alicloud-rds/commit/4f0586f1080f1603a3dd8a62bf9161fed7f5c42d))
+
+
+### Bug Fixes
+
+* support Alicloud provider 2.0.0 ([#36](https://github.com/alibabacloud-automation/terraform-alicloud-rds/issues/36)) ([53ac87a](https://github.com/alibabacloud-automation/terraform-alicloud-rds/commit/53ac87a0fc99e13689ac1578fdc9f29ceb1735a4))
+
 ## [3.0.0](https://github.com/alibabacloud-automation/terraform-alicloud-rds/compare/v2.5.1...v3.0.0) (2026-04-22)
 
 
